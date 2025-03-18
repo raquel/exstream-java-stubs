@@ -1,0 +1,1821 @@
+openapi: 3.0.1
+info:
+  description: '**For internal use of the product only**'
+  title: Exstream CXI Integration
+  version: v1
+servers:
+- description: service frontend url
+  url: https://vm-exstreamna1.eimdemo.com/ei
+tags:
+- description: Event Metric Controller
+  name: /api/v1/eventmetrics
+- description: Config Type Controller
+  name: /api/v1/configTypes
+- description: External Configuration Controller
+  name: /api/v1/internal
+- description: Tenant Admin Controller
+  name: /api/v1/tenants
+- description: Config Controller
+  name: /api/v1/config
+paths:
+  /api/v1/tenants/{tenantId}/schema:
+    put:
+      operationId: updateTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/tenants/updateTenant:
+    put:
+      operationId: updateTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/tenants/all/schema:
+    put:
+      operationId: updateTenantSchemas
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/secrets/{domain}/{secretId}:
+    put:
+      operationId: setSecret
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: secretId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecretInfo'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - secret-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secret-controller
+  /api/v1/internal/{tenantId}/{domainId}/state:
+    put:
+      operationId: updateProcessingState
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessState'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseExternalConfiguration'
+          description: OK
+      tags:
+      - /api/v1/internal
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/internal
+  /api/v1/config/{tenantId}/{domainId}:
+    put:
+      operationId: updateConfig
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigFormat'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseExternalConfiguration'
+          description: OK
+      tags:
+      - /api/v1/config
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/config
+  /api/v1/config/validate-covisint/{tenantId}/{domainId}:
+    put:
+      operationId: validateCovisintConfig
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties:
+                type: string
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseBoolean'
+          description: OK
+      tags:
+      - /api/v1/config
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/config
+  /api/v1/tenants/{tenantId}:
+    get:
+      operationId: getTenant
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+    post:
+      operationId: createTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          maxLength: 40
+          minLength: 1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/tenants/addTenant:
+    post:
+      operationId: createTenantWithExistingSchema
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/secrets/{domain}/rollover:
+    post:
+      operationId: rolloverKeys
+      parameters:
+      - explode: true
+        in: query
+        name: oldKeyId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                format: int32
+                type: integer
+          description: OK
+      tags:
+      - secret-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secret-controller
+  /api/v1/secrets/migrateVault:
+    post:
+      operationId: migrateVault
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: boolean
+          description: OK
+      summary: Migrate secrets to vault.
+      tags:
+      - secrets-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secrets-controller
+  /api/v1/version/api:
+    get:
+      operationId: getApiVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/version:
+    get:
+      operationId: getVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionConfig'
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/tenants:
+    get:
+      operationId: getTenants
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/tenants/configuration:
+    get:
+      operationId: getTenantConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenantsConfiguration'
+          description: OK
+      tags:
+      - /api/v1/tenants
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenants
+  /api/v1/secrets/{domain}/{secretId}/exists:
+    get:
+      operationId: secretExists
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: secretId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - secret-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secret-controller
+  /api/v1/internal/{eventType}:
+    get:
+      operationId: getConfigs
+      parameters:
+      - explode: false
+        in: path
+        name: eventType
+        required: true
+        schema:
+          enum:
+          - emailevent
+          - covisint
+          - custommetadata
+          - cleanup
+          type: string
+        style: simple
+      - description: "For pagination, fetch entities after this many"
+        example: 0
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: "For pagination, the number of entities per page"
+        example: 1000
+        explode: true
+        in: query
+        name: count
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageResponseMessage'
+          description: OK
+      tags:
+      - /api/v1/internal
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/internal
+  /api/v1/eventmetrics/events/{tenantId}/{domainId}:
+    get:
+      operationId: getEventsReport
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseLong'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/events/{tenantId}/{domainId}/content:
+    get:
+      operationId: getEvents
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: eventType
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseListEvents'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/email-event/{tenantId}/{domainId}:
+    get:
+      operationId: getEmaileventReport
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: connectorType
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: processingState
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseLong'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/email-event/{tenantId}/{domainId}/states:
+    get:
+      operationId: getProcessingStateEmaileventReport
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: connectorType
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: processingStates
+        required: true
+        schema:
+          items:
+            format: int32
+            type: integer
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseLong'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/email-event/{tenantId}/{domainId}/content:
+    get:
+      operationId: getEmailEvents
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: connectorType
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseListEmailevent'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/docgen-event/{tenantId}/{domainId}:
+    get:
+      operationId: getDocgenReport
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: processingState
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseLong'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/docgen-event/{tenantId}/{domainId}/{flowStepId}/metadata:
+    get:
+      operationId: getCustomMetadataEvents
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: communicationId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: false
+        in: path
+        name: flowStepId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseListEvents'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/eventmetrics/docgen-event/{tenantId}/{domainId}/states:
+    get:
+      operationId: getProcessingStatesEvents
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: processingStates
+        required: true
+        schema:
+          items:
+            format: int32
+            type: integer
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeStart
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: lastUpdateTimeEnd
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseListEvents'
+          description: OK
+      tags:
+      - /api/v1/eventmetrics
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/eventmetrics
+  /api/v1/configTypes/{tenantId}/{domainId}:
+    get:
+      operationId: getConfigurationTypes
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseEditableConfig'
+          description: OK
+      tags:
+      - /api/v1/configTypes
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/configTypes
+  /api/v1/config/{tenantId}/{domainId}/{configName}:
+    delete:
+      operationId: deleteConfig
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: configName
+        required: true
+        schema:
+          enum:
+          - covisint
+          - custommetadata
+          - cleanup
+          - unknown
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: OK
+      tags:
+      - /api/v1/config
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/config
+    get:
+      operationId: getConfig
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: configName
+        required: true
+        schema:
+          enum:
+          - covisint
+          - custommetadata
+          - cleanup
+          - unknown
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExternalConfiguration'
+          description: OK
+      tags:
+      - /api/v1/config
+      x-accepts: '*/*'
+      x-tags:
+      - tag: /api/v1/config
+components:
+  schemas:
+    DataResponseTenant:
+      example:
+        data:
+          schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/Tenant'
+      type: object
+    Schema:
+      example:
+        schemaMissingFromDatabase: true
+        schemaId: schemaId
+        latestSchemaChangeLogEntry:
+          liquiBaseVersion: liquiBaseVersion
+          orderExecuted: 0
+          id: id
+          dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        schemaId:
+          type: string
+        latestSchemaChangeLogEntry:
+          $ref: '#/components/schemas/SchemaChangeLogEntry'
+        schemaMissingFromDatabase:
+          type: boolean
+      type: object
+    SchemaChangeLogEntry:
+      example:
+        liquiBaseVersion: liquiBaseVersion
+        orderExecuted: 0
+        id: id
+        dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        dateExecuted:
+          format: date-time
+          type: string
+        orderExecuted:
+          format: int32
+          type: integer
+        liquiBaseVersion:
+          type: string
+      type: object
+    Tenant:
+      example:
+        schema:
+          schemaMissingFromDatabase: true
+          schemaId: schemaId
+          latestSchemaChangeLogEntry:
+            liquiBaseVersion: liquiBaseVersion
+            orderExecuted: 0
+            id: id
+            dateExecuted: 2000-01-23T04:56:07.000+00:00
+        tenantId: tenantId
+      properties:
+        tenantId:
+          type: string
+        schema:
+          $ref: '#/components/schemas/Schema'
+      type: object
+    CreateTenantBody:
+      example:
+        tenantId: tenantId
+        schemaName: schemaName
+        dbUserId: dbUserId
+        dbPassword: dbPassword
+      properties:
+        tenantId:
+          maxLength: 40
+          minLength: 1
+          type: string
+        schemaName:
+          type: string
+        dbUserId:
+          type: string
+        dbPassword:
+          type: string
+      required:
+      - dbPassword
+      type: object
+    ListResponseTenant:
+      example:
+        data:
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Tenant'
+          type: array
+      type: object
+    SecretInfo:
+      example:
+        b64Content: b64Content
+        decodedContent: decodedContent
+      properties:
+        b64Content:
+          type: string
+        decodedContent:
+          type: string
+      type: object
+    ProcessState:
+      example:
+        configName: covisint
+        processingState: 0
+        auditLogId: 6
+        details: details
+      properties:
+        configName:
+          enum:
+          - covisint
+          - custommetadata
+          - cleanup
+          - unknown
+          type: string
+        processingState:
+          format: int32
+          type: integer
+        details:
+          type: string
+        auditLogId:
+          format: int32
+          type: integer
+      type: object
+    DataResponseExternalConfiguration:
+      example:
+        data:
+          processingState: 0
+          auditEnable: true
+          configDetails: "{}"
+          tenantId: tenantId
+          id: id
+          isActive: true
+          configType: configType
+          domainId: domainId
+          lastProcessDate: 2000-01-23T04:56:07.000+00:00
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/ExternalConfiguration'
+      type: object
+    ExternalConfiguration:
+      example:
+        processingState: 0
+        auditEnable: true
+        configDetails: "{}"
+        tenantId: tenantId
+        id: id
+        isActive: true
+        configType: configType
+        domainId: domainId
+        lastProcessDate: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        domainId:
+          type: string
+        tenantId:
+          type: string
+        isActive:
+          type: boolean
+        processingState:
+          format: int32
+          type: integer
+        lastProcessDate:
+          format: date-time
+          type: string
+        configType:
+          type: string
+        configDetails:
+          type: object
+        auditEnable:
+          type: boolean
+      type: object
+    ConfigDetails:
+      example:
+        clientId: clientId
+        schemaVersion: schemaVersion
+        apiKey: apiKey
+        certificate: certificate
+        userName: userName
+        url: url
+        proxy:
+          password: password
+          port: port
+          host: host
+          userName: userName
+        processingState: 0
+        password: password
+        tenantId: tenantId
+        cleanUpDays: 6
+        clientSecret: clientSecret
+        schemaSource: schemaSource
+      properties:
+        apiKey:
+          type: string
+        certificate:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        proxy:
+          $ref: '#/components/schemas/ConfigProxy'
+        password:
+          type: string
+        processingState:
+          format: int32
+          type: integer
+        schemaSource:
+          type: string
+        schemaVersion:
+          type: string
+        tenantId:
+          type: string
+        url:
+          type: string
+        userName:
+          type: string
+        cleanUpDays:
+          format: int32
+          type: integer
+      type: object
+    ConfigFormat:
+      example:
+        configName: covisint
+        auditEnable: true
+        configDetails:
+          clientId: clientId
+          schemaVersion: schemaVersion
+          apiKey: apiKey
+          certificate: certificate
+          userName: userName
+          url: url
+          proxy:
+            password: password
+            port: port
+            host: host
+            userName: userName
+          processingState: 0
+          password: password
+          tenantId: tenantId
+          cleanUpDays: 6
+          clientSecret: clientSecret
+          schemaSource: schemaSource
+        isActive: true
+      properties:
+        isActive:
+          type: boolean
+        configName:
+          enum:
+          - covisint
+          - custommetadata
+          - cleanup
+          - unknown
+          type: string
+        configDetails:
+          $ref: '#/components/schemas/ConfigDetails'
+        auditEnable:
+          type: boolean
+      type: object
+    ConfigProxy:
+      example:
+        password: password
+        port: port
+        host: host
+        userName: userName
+      properties:
+        host:
+          type: string
+        port:
+          type: string
+        userName:
+          type: string
+        password:
+          type: string
+      type: object
+    DataResponseBoolean:
+      example:
+        data: true
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          type: boolean
+      type: object
+    Details:
+      example:
+        git:
+          commits: commits
+          tag: tag
+          branch: branch
+          hash: hash
+        appName: appName
+        buildNumber: buildNumber
+        timestamp: timestamp
+      properties:
+        git:
+          $ref: '#/components/schemas/GitConfig'
+        appName:
+          type: string
+        buildNumber:
+          type: string
+        timestamp:
+          type: string
+      type: object
+    GitConfig:
+      example:
+        commits: commits
+        tag: tag
+        branch: branch
+        hash: hash
+      properties:
+        tag:
+          type: string
+        hash:
+          type: string
+        branch:
+          type: string
+        commits:
+          type: string
+      type: object
+    VersionConfig:
+      example:
+        patch: patch
+        major: major
+        minor: minor
+        versionString: versionString
+        apiIdentifier: apiIdentifier
+        details:
+          git:
+            commits: commits
+            tag: tag
+            branch: branch
+            hash: hash
+          appName: appName
+          buildNumber: buildNumber
+          timestamp: timestamp
+        clientVersion: clientVersion
+      properties:
+        apiIdentifier:
+          type: string
+        clientVersion:
+          type: string
+        details:
+          $ref: '#/components/schemas/Details'
+        major:
+          type: string
+        minor:
+          type: string
+        patch:
+          type: string
+        versionString:
+          type: string
+      type: object
+    DataResponseTenantsConfiguration:
+      example:
+        data:
+          autoSchemaManagement: true
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/TenantsConfiguration'
+      type: object
+    TenantsConfiguration:
+      example:
+        autoSchemaManagement: true
+      properties:
+        autoSchemaManagement:
+          type: boolean
+      type: object
+    Configuration:
+      example:
+        details: "{}"
+        configType: covisint
+      properties:
+        configType:
+          enum:
+          - covisint
+          - custommetadata
+          - cleanup
+          - unknown
+          type: string
+        details:
+          type: object
+      type: object
+    DatabaseConfig:
+      example:
+        dbSchema: dbSchema
+        dbName: dbName
+        connectionUrl: connectionUrl
+        dbUserName: dbUserName
+        dbVendor: dbVendor
+        dbPassword: dbPassword
+      properties:
+        dbVendor:
+          type: string
+        dbName:
+          type: string
+        dbSchema:
+          type: string
+        dbUserName:
+          type: string
+        dbPassword:
+          type: string
+        connectionUrl:
+          type: string
+      type: object
+    Environment:
+      example:
+        tenantId: tenantId
+        domainId: domainId
+      properties:
+        tenantId:
+          type: string
+        domainId:
+          type: string
+      type: object
+    Message:
+      example:
+        environment:
+          tenantId: tenantId
+          domainId: domainId
+        database:
+          dbSchema: dbSchema
+          dbName: dbName
+          connectionUrl: connectionUrl
+          dbUserName: dbUserName
+          dbVendor: dbVendor
+          dbPassword: dbPassword
+        configuration:
+          details: "{}"
+          configType: covisint
+        auditLogId: 0
+      properties:
+        environment:
+          $ref: '#/components/schemas/Environment'
+        database:
+          $ref: '#/components/schemas/DatabaseConfig'
+        configuration:
+          $ref: '#/components/schemas/Configuration'
+        auditLogId:
+          format: int32
+          type: integer
+      type: object
+    PageResponseMessage:
+      example:
+        data:
+        - environment:
+            tenantId: tenantId
+            domainId: domainId
+          database:
+            dbSchema: dbSchema
+            dbName: dbName
+            connectionUrl: connectionUrl
+            dbUserName: dbUserName
+            dbVendor: dbVendor
+            dbPassword: dbPassword
+          configuration:
+            details: "{}"
+            configType: covisint
+          auditLogId: 0
+        - environment:
+            tenantId: tenantId
+            domainId: domainId
+          database:
+            dbSchema: dbSchema
+            dbName: dbName
+            connectionUrl: connectionUrl
+            dbUserName: dbUserName
+            dbVendor: dbVendor
+            dbPassword: dbPassword
+          configuration:
+            details: "{}"
+            configType: covisint
+          auditLogId: 0
+        page:
+          pageOffset: 1
+          totalPages: 5
+          currentPageNumber: 2
+          pageSize: 6
+          totalElements: 5
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        page:
+          $ref: '#/components/schemas/SimplePage'
+      type: object
+    SimplePage:
+      example:
+        pageOffset: 1
+        totalPages: 5
+        currentPageNumber: 2
+        pageSize: 6
+        totalElements: 5
+      properties:
+        pageSize:
+          format: int32
+          type: integer
+        pageOffset:
+          format: int32
+          type: integer
+        totalElements:
+          format: int64
+          type: integer
+        totalPages:
+          format: int32
+          type: integer
+        currentPageNumber:
+          format: int32
+          type: integer
+      type: object
+    DataResponseLong:
+      example:
+        data: 0
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          format: int64
+          type: integer
+      type: object
+    DataResponseListEvents:
+      example:
+        data:
+        - processingState: 1
+          eventTime: 2000-01-23T04:56:07.000+00:00
+          customMetadata: customMetadata
+          id: 0
+          eventType: 6
+          domainId: domainId
+          customMetadataId: customMetadataId
+          eventMetadata: eventMetadata
+          lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+        - processingState: 1
+          eventTime: 2000-01-23T04:56:07.000+00:00
+          customMetadata: customMetadata
+          id: 0
+          eventType: 6
+          domainId: domainId
+          customMetadataId: customMetadataId
+          eventMetadata: eventMetadata
+          lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Events'
+          type: array
+      type: object
+    Events:
+      example:
+        processingState: 1
+        eventTime: 2000-01-23T04:56:07.000+00:00
+        customMetadata: customMetadata
+        id: 0
+        eventType: 6
+        domainId: domainId
+        customMetadataId: customMetadataId
+        eventMetadata: eventMetadata
+        lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int64
+          type: integer
+        eventType:
+          format: int32
+          type: integer
+        domainId:
+          type: string
+        customMetadataId:
+          type: string
+        eventTime:
+          format: date-time
+          type: string
+        lastUpdateTime:
+          format: date-time
+          type: string
+        processingState:
+          format: int32
+          type: integer
+        eventMetadata:
+          type: string
+        customMetadata:
+          type: string
+      type: object
+    DataResponseListEmailevent:
+      example:
+        data:
+        - eventId: 0
+          connectorType: connectorType
+          eventRef: eventRef
+          eventType: eventType
+          domainId: domainId
+          jobId: jobId
+          processingState: 6
+          trackerId: trackerId
+          eventStatus: eventStatus
+          tenantId: tenantId
+          custMetadataId: custMetadataId
+          eventDate: 2000-01-23T04:56:07.000+00:00
+          lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+        - eventId: 0
+          connectorType: connectorType
+          eventRef: eventRef
+          eventType: eventType
+          domainId: domainId
+          jobId: jobId
+          processingState: 6
+          trackerId: trackerId
+          eventStatus: eventStatus
+          tenantId: tenantId
+          custMetadataId: custMetadataId
+          eventDate: 2000-01-23T04:56:07.000+00:00
+          lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Emailevent'
+          type: array
+      type: object
+    Emailevent:
+      example:
+        eventId: 0
+        connectorType: connectorType
+        eventRef: eventRef
+        eventType: eventType
+        domainId: domainId
+        jobId: jobId
+        processingState: 6
+        trackerId: trackerId
+        eventStatus: eventStatus
+        tenantId: tenantId
+        custMetadataId: custMetadataId
+        eventDate: 2000-01-23T04:56:07.000+00:00
+        lastUpdateTime: 2000-01-23T04:56:07.000+00:00
+      properties:
+        eventId:
+          format: int64
+          type: integer
+        connectorType:
+          type: string
+        custMetadataId:
+          type: string
+        domainId:
+          type: string
+        eventDate:
+          format: date-time
+          type: string
+        eventType:
+          type: string
+        jobId:
+          type: string
+        lastUpdateTime:
+          format: date-time
+          type: string
+        processingState:
+          format: int32
+          type: integer
+        tenantId:
+          type: string
+        trackerId:
+          type: string
+        eventRef:
+          type: string
+        eventStatus:
+          type: string
+      type: object
+    ConfigType:
+      example:
+        configName: configName
+        createdby: createdby
+        lastupdatedby: lastupdatedby
+        autoConfig: true
+        id: 0
+        creationtime: 2000-01-23T04:56:07.000+00:00
+        lastupdatedtime: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: int32
+          type: integer
+        configName:
+          type: string
+        autoConfig:
+          type: boolean
+        createdby:
+          type: string
+        creationtime:
+          format: date-time
+          type: string
+        lastupdatedby:
+          type: string
+        lastupdatedtime:
+          format: date-time
+          type: string
+      type: object
+    EditableConfig:
+      example:
+        configType:
+          configName: configName
+          createdby: createdby
+          lastupdatedby: lastupdatedby
+          autoConfig: true
+          id: 0
+          creationtime: 2000-01-23T04:56:07.000+00:00
+          lastupdatedtime: 2000-01-23T04:56:07.000+00:00
+        enabled: true
+      properties:
+        configType:
+          $ref: '#/components/schemas/ConfigType'
+        enabled:
+          type: boolean
+      type: object
+    ListResponseEditableConfig:
+      example:
+        data:
+        - configType:
+            configName: configName
+            createdby: createdby
+            lastupdatedby: lastupdatedby
+            autoConfig: true
+            id: 0
+            creationtime: 2000-01-23T04:56:07.000+00:00
+            lastupdatedtime: 2000-01-23T04:56:07.000+00:00
+          enabled: true
+        - configType:
+            configName: configName
+            createdby: createdby
+            lastupdatedby: lastupdatedby
+            autoConfig: true
+            id: 0
+            creationtime: 2000-01-23T04:56:07.000+00:00
+            lastupdatedtime: 2000-01-23T04:56:07.000+00:00
+          enabled: true
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/EditableConfig'
+          type: array
+      type: object
+    GenericResponse:
+      example:
+        status: status
+      properties:
+        status:
+          type: string
+      type: object
