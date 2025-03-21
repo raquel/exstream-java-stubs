@@ -9,6 +9,7 @@ org/openapitools/model/WorkflowRequestBody.class
 org/openapitools/model/ListResponseResourceHistory.class
 org/openapitools/model/ResourceVersion$StateEnum.class
 org/openapitools/model/ExportPackageMetadata.class
+org/openapitools/RFC3339DateFormat.class
 org/openapitools/model/Range.class
 org/openapitools/model/DataResponseResourceCategory.class
 org/openapitools/model/ImportHistory.class
@@ -25,7 +26,6 @@ org/openapitools/model/TreeResourceVersion$StateEnum.class
 org/openapitools/model/Sentiment.class
 org/openapitools/model/AugmentedAuthoring.class
 org/openapitools/model/ImportConflictResource$PerformedActionEnum.class
-org/openapitools/configuration/ClientPropertiesConfiguration.class
 org/openapitools/model/ResourceVersion$TypeEnum.class
 org/openapitools/model/GenericResponse.class
 org/openapitools/model/Frame.class
@@ -33,7 +33,6 @@ org/openapitools/model/ImportConflictResource$UserSelectedActionEnum.class
 org/openapitools/model/Structure.class
 org/openapitools/model/ListResponseResourceVersion.class
 org/openapitools/model/ReplacementPolicySettings.class
-org/openapitools/api/ApiApiClient.class
 org/openapitools/model/PostGetThemeWithOptionsPayload.class
 org/openapitools/model/ResourceContentDescriptor.class
 org/openapitools/model/ImportFoundResource$StateEnum.class
@@ -44,9 +43,9 @@ org/openapitools/model/DataResponseResourceVersion.class
 org/openapitools/model/Grammar.class
 org/openapitools/model/BasicResourceVersion$TypeEnum.class
 org/openapitools/model/TreeResourceVersion$TypeEnum.class
+org/openapitools/configuration/SpringDocConfiguration.class
 org/openapitools/model/ImportFoundCategory.class
 org/openapitools/model/DataResponseTheme.class
-org/openapitools/configuration/ClientConfiguration.class
 org/openapitools/model/GitConfig.class
 org/openapitools/model/MultipleLinksBody.class
 org/openapitools/model/ImportFoundResource.class
@@ -58,10 +57,12 @@ org/openapitools/model/ReplacementPolicySettings$GeneralPolicyEnum.class
 org/openapitools/model/DataResponseTreeResourceVersion.class
 org/openapitools/model/ResourceHistory.class
 org/openapitools/model/ImportConflictResource$StateEnum.class
-org/openapitools/configuration/ApiKeyRequestInterceptor.class
+org/openapitools/api/ApiApiController.class
 org/openapitools/model/ResourceIdStateOverride.class
 org/openapitools/model/LinkDTO.class
 org/openapitools/model/DataResponseLinkDTO.class
+org/openapitools/api/ApiUtil.class
+org/openapitools/configuration/HomeController.class
 org/openapitools/model/ResourceHistory$OperationEnum.class
 org/openapitools/model/ImportHistory$StatusEnum.class
 org/openapitools/OpenApiGeneratorApplication.class

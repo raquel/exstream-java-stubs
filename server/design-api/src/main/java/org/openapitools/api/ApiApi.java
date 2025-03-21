@@ -53,10 +53,14 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T19:48:54.642847216Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T17:54:43.132703260Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "links-controller", description = "Links Controller")
 public interface ApiApi {
+
+    default Optional<NativeWebRequest> getRequest() {
+        return Optional.empty();
+    }
 
     /**
      * POST /api/v1/links/{domain} : Create a resource link
@@ -86,14 +90,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/links/{domain}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseLinkDTO> createLinkUsingPOST(
+    default ResponseEntity<DataResponseLinkDTO> createLinkUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "link", description = "link", required = true) @Valid @RequestBody LinkDTO link
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -124,14 +140,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/links/{domain}/multiple",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<ListResponseLinkDTO> createLinksUsingPOST(
+    default ResponseEntity<ListResponseLinkDTO> createLinksUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "body", description = "body", required = true) @Valid @RequestBody MultipleLinksBody body
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -165,17 +193,29 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/resources/{domain}/content",
-        produces = "*/*",
-        consumes = "multipart/form-data"
+        produces = { "*/*" },
+        consumes = { "multipart/form-data" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> createResourceFromFileUsingPOST(
+    default ResponseEntity<DataResponseResourceVersion> createResourceFromFileUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @NotNull @Parameter(name = "name", description = "The name of the resource to create.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "name", required = true) String name,
         @NotNull @Parameter(name = "type", description = "The type of resource to create.", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "type", required = true) String type,
         @Parameter(name = "file", description = "The binary file to upload.", required = true) @RequestPart(value = "file", required = true) MultipartFile file,
         @Parameter(name = "subtype", description = "The subtype of resource to create. Appears in metadata.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "subtype", required = false) String subtype
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -214,11 +254,11 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/resources/{domain}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> createResourceUsingPOST(
+    default ResponseEntity<DataResponseResourceVersion> createResourceUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "body", description = "body", required = true) @Valid @RequestBody ResourceVersion body,
         @Parameter(name = "charset.registered", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "charset.registered", required = false) Boolean charsetRegistered,
@@ -229,7 +269,19 @@ public interface ApiApi {
         @Parameter(name = "type", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "type", required = false) String type,
         @Parameter(name = "wildcardSubtype", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "wildcardSubtype", required = false) Boolean wildcardSubtype,
         @Parameter(name = "wildcardType", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "wildcardType", required = false) Boolean wildcardType
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -260,14 +312,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/themes/{domain}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> createThemeUsingPOST(
+    default ResponseEntity<DataResponseResourceVersion> createThemeUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "request", description = "request", required = true) @Valid @RequestBody CreateThemeRequest request
-    );
+    ) {
+        getRequest().ifPresent(request1 -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request1.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request1, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -296,13 +360,25 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/links/{domain}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<GenericResponse> deleteLinkUsingDELETE(
+    default ResponseEntity<GenericResponse> deleteLinkUsingDELETE(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "link", description = "link", required = true) @Valid @RequestBody LinkDTO link
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                    String exampleString = "{ \"status\" : \"status\" }";
+                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -331,13 +407,25 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/links/{domain}/multiple",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<GenericResponse> deleteLinksUsingDELETE(
+    default ResponseEntity<GenericResponse> deleteLinksUsingDELETE(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "body", description = "body", required = true) @Valid @RequestBody MultipleLinksBody body
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                    String exampleString = "{ \"status\" : \"status\" }";
+                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -367,14 +455,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/resources/{domain}/{id}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<GenericResponse> deleteResourceUsingDELETE(
+    default ResponseEntity<GenericResponse> deleteResourceUsingDELETE(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "version", description = "Valid values are LATEST, ALL, or an actual version number. If not specified, will use LATEST.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) String version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                    String exampleString = "{ \"status\" : \"status\" }";
+                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -407,16 +507,28 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/demote",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> demoteUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> demoteUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "toDomain", description = "toDomain", required = true) @Valid @RequestBody Domain toDomain,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false, defaultValue = "-1") Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -446,11 +558,14 @@ public interface ApiApi {
         value = "/api/v1/export/{domain}/{rootId}"
     )
     
-    ResponseEntity<Void> exportResourcesFromRootInDomainUsingGET(
+    default ResponseEntity<Void> exportResourcesFromRootInDomainUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "rootId", description = "rootId", required = true, in = ParameterIn.PATH) @PathVariable("rootId") UUID rootId,
         @Parameter(name = "versions", description = "versions", in = ParameterIn.QUERY) @Valid @RequestParam(value = "versions", required = false, defaultValue = "LATEST_APPROVED") String versions
-    );
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -481,15 +596,18 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/resources/{domain}/{id}/content",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<Object> getContentUsingGET(
+    default ResponseEntity<Object> getContentUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "state", description = "state", in = ParameterIn.QUERY) @Valid @RequestParam(value = "state", required = false) String state,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    );
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -516,12 +634,24 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/import/logs",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<ListResponseImportHistory> getImportHistoryUsingGET(
+    default ResponseEntity<ListResponseImportHistory> getImportHistoryUsingGET(
         
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -562,10 +692,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/links/{domain}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<PageResponseLinkDTO> getLinksUsingGET(
+    default ResponseEntity<PageResponseLinkDTO> getLinksUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "count", description = "For pagination, the number of entities per page", in = ParameterIn.QUERY) @Valid @RequestParam(value = "count", required = false) Integer count,
         @Parameter(name = "effectiveDate", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "effectiveDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime effectiveDate,
@@ -580,7 +710,19 @@ public interface ApiApi {
         @Parameter(name = "tfilter", description = "The query will use this value to filter resources as the query traverses the link tree. This stepwise filter can be combined with the other stepwise filters. It cannot be combined with the simple filter parameter. See filter for details of this filter's possible values.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "tfilter", required = false) String tfilter,
         @Parameter(name = "useEffectiveDate", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "useEffectiveDate", required = false) Boolean useEffectiveDate,
         @Parameter(name = "vfilter", description = "The query will use this value to filter resources as the query determines latest versions. This stepwise filter can be combined with the other stepwise filters. It cannot be combined with the simple filter parameter. See filter for details of this filter's possible values.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "vfilter", required = false) String vfilter
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -616,16 +758,19 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/resources/{domain}/{id}/content/{type}",
-        produces = "application/xml,image/png,text/xml"
+        produces = { "application/xml", "image/png", "text/xml" }
     )
     
-    ResponseEntity<Object> getResourceContentUsingGET(
+    default ResponseEntity<Object> getResourceContentUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "type", description = "type", required = true, in = ParameterIn.PATH) @PathVariable("type") String type,
         @Parameter(name = "state", description = "state", in = ParameterIn.QUERY) @Valid @RequestParam(value = "state", required = false) String state,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    );
+    ) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -655,14 +800,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/resources/{domain}/history/{resourceId}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<ListResponseResourceHistory> getResourceHistoryUsingGET(
+    default ResponseEntity<ListResponseResourceHistory> getResourceHistoryUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "resourceId", description = "resourceId", required = true, in = ParameterIn.PATH) @PathVariable("resourceId") UUID resourceId,
         @Parameter(name = "fetchAcrossDomains", description = "fetchAcrossDomains", in = ParameterIn.QUERY) @Valid @RequestParam(value = "fetchAcrossDomains", required = false) Boolean fetchAcrossDomains
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -695,17 +852,29 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/resources/{domain}/{id}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> getResourceUsingGET(
+    default ResponseEntity<DataResponseResourceVersion> getResourceUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "checkIfLatestVersion", description = "checkIfLatestVersion", in = ParameterIn.QUERY) @Valid @RequestParam(value = "checkIfLatestVersion", required = false, defaultValue = "false") Boolean checkIfLatestVersion,
         @Parameter(name = "expand", description = "expand", in = ParameterIn.QUERY) @Valid @RequestParam(value = "expand", required = false) String expand,
         @Parameter(name = "state", description = "state", in = ParameterIn.QUERY) @Valid @RequestParam(value = "state", required = false) String state,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -745,10 +914,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/links/{domain}/resources",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<PageResponseResourceVersion> getResourcesUsingGET(
+    default ResponseEntity<PageResponseResourceVersion> getResourcesUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "count", description = "For pagination, the number of entities per page", in = ParameterIn.QUERY) @Valid @RequestParam(value = "count", required = false) Integer count,
         @Parameter(name = "effectiveDate", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "effectiveDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime effectiveDate,
@@ -762,7 +931,19 @@ public interface ApiApi {
         @Parameter(name = "tfilter", description = "The query will use this value to filter resources as the query traverses the link tree. This stepwise filter can be combined with the other stepwise filters. It cannot be combined with the simple filter parameter. See filter for details of this filter's possible values.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "tfilter", required = false) String tfilter,
         @Parameter(name = "useEffectiveDate", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "useEffectiveDate", required = false) Boolean useEffectiveDate,
         @Parameter(name = "vfilter", description = "The query will use this value to filter resources as the query determines latest versions. This stepwise filter can be combined with the other stepwise filters. It cannot be combined with the simple filter parameter. See filter for details of this filter's possible values.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "vfilter", required = false) String vfilter
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -800,10 +981,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/resources/{domain}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<PageResponseResourceVersion> getResourcesUsingGET1(
+    default ResponseEntity<PageResponseResourceVersion> getResourcesUsingGET1(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "advancedFilter", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "advancedFilter", required = false) String advancedFilter,
         @Parameter(name = "count", description = "For pagination, the number of entities per page", in = ParameterIn.QUERY) @Valid @RequestParam(value = "count", required = false) Integer count,
@@ -815,7 +996,19 @@ public interface ApiApi {
         @Parameter(name = "filter", description = "The filter value is a semicolon delimited list of key value pairs. For example:  name:Example;states:DRAFT,APPROVED;searchString:*ample List values separate possible values with commas. Keys include: | filter name           | Filter value description                                                                        | |-----------------------|-------------------------------------------------------------------------------------------------| | description           | Match resources with this description.                                                          | | excludedTypes         | Match resources whose types do not appear in this comma-separated list.                         | | variableIsArray       | Matches resources against this value.                                                           | | variableType          | Match resources whose variableType is one of these specified.                                   | | ids                   | Match resources with ids in this comma-separated list.                                          | | excludedIds           | Match resources with ids that are NOT in this comma-separated list.                             | | parentId              | Exclude this resource and others directly linked to it. Only usable in the resources API.       | | parentVersion         | For use with parentId. Must use both.                                                           | | name                  | Match resources with this name.                                                                 | | overrideIds           | When matching by states, do not apply the states filter to resources with ids in this list.     | | overrideStates        | When matching by states, apply this states filter to resources with ids in the overrideIds list.| | resourcePackId        | Match resources with this resource pack id.                                                     | | searchString          | Match resources with names or descriptions matching this string. Use a &ast; as a wildcard.     | | caseSensitive         | Specify if searches (name, description, searchString) are case sensitive or not.                | | wholeWord             | Specify if searches (name, description, searchString) match whole word or not.                  | | createdBy             | Match resources created by this user.                                                           | | lastModifiedBy        | Match resources last modified by this user.                                                     | | createdDateStart      | Match resources created on or after this date. (yyyy-MM-dd format).                                   | | createdDateEnd        | Match resources created before this date. (yyyy-MM-dd format).                                  | | lastModifiedDateStart | Match resources last modified on or after this date. (yyyy-MM-dd format).                             | | lastModifiedDateEnd   | Match resources last modified before this date. (yyyy-MM-dd format).                            | | states                | Match resources with states in this list. States include: DRAFT,REVIEW,APPROVED,REJECTED      | | latestVersion         | Set to false to fetch all versions of resources matching the rest of this filter. Only usable in the resources API.| | types                 | Match resources with types in this list. Types include: resourcepack, exstrapplication, exstrdocument, exstrpage, exstrcomponentobj, exstremail, exstrengine, exstrvariablebase, exstrpackage, exstrgraphicalmessage, exstrtextmessage, exstrparagraph, exstrparagraphsection, image, samplefile, exstrdatasource, exstrhtml5, versionedtemplate, documentdefinition, enginerundef, font, fontdefinition, exstrbarcode, exstrpapertype, exstrmessagetype, exstrmetadata, exstrcommunicationset, exstroutputqueue, exstroutput, exstrmigrationset, exstrmessaging         | | systemResource        | Match resources that are (or are not) system resources.                                         | | hasApprovedVersion    | Match resources where a previously approved version of the resources exist.                     | | hidden                | Match resources that are (or are not) hidden.                                                   | | includeVariants       | Set to true to include variants in the response. By default they are excluded unless standardVariantId is specified.| | standardVariantId     | Match resources that are variants of this specified one. Can not be used when includeVariants is explicitly false.  | | categories            | Match resources that are contain at least one of the categories from this list.                 |", in = ParameterIn.QUERY) @Valid @RequestParam(value = "filter", required = false) String filter,
         @Parameter(name = "offset", description = "For pagination, fetch entities after this many", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false) Integer offset,
         @Parameter(name = "sort", description = "Comma separated list of {asc|desc}_{field name}", in = ParameterIn.QUERY) @Valid @RequestParam(value = "sort", required = false) String sort
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -845,14 +1038,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/themes/{domain}/{themeId}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseTheme> getThemeUsingGET(
+    default ResponseEntity<DataResponseTheme> getThemeUsingGET(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "themeId", description = "themeId", required = true, in = ParameterIn.PATH) @PathVariable("themeId") UUID themeId,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false, defaultValue = "-1") Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -885,16 +1090,28 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/themes/{domain}/{themeId}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseTheme> getThemeWithOptionsUsingPOST(
+    default ResponseEntity<DataResponseTheme> getThemeWithOptionsUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "themeId", description = "themeId", required = true, in = ParameterIn.PATH) @PathVariable("themeId") UUID themeId,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false, defaultValue = "-1") Integer version,
         @Parameter(name = "options", description = "options") @Valid @RequestBody(required = false) PostGetThemeWithOptionsPayload options
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -925,13 +1142,25 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/hide",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResource> hideResourceUsingPUT(
+    default ResponseEntity<DataResponseResource> hideResourceUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -965,17 +1194,29 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/import/{packagetype}/{domain}",
-        produces = "*/*",
-        consumes = "multipart/form-data"
+        produces = { "*/*" },
+        consumes = { "multipart/form-data" }
     )
     
-    ResponseEntity<DataResponseImportResponse> importPackageUsingPOST(
+    default ResponseEntity<DataResponseImportResponse> importPackageUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "packagetype", description = "packagetype", required = true, in = ParameterIn.PATH) @PathVariable("packagetype") String packagetype,
         @Parameter(name = "commit", description = "Set to false to do a dry run", in = ParameterIn.QUERY) @Valid @RequestParam(value = "commit", required = false) String commit,
         @Parameter(name = "previousExportPackage", description = "The id of a previously uploaded export package.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "previousExportPackage", required = false) String previousExportPackage,
         @Parameter(name = "exportPackage", description = "The zip of the export to import") @RequestPart(value = "exportPackage", required = false) MultipartFile exportPackage
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1007,14 +1248,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/resources/{domain}/{id}/lock",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> lockResourceUsingPOST(
+    default ResponseEntity<DataResponseResourceVersion> lockResourceUsingPOST(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1047,16 +1300,28 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/promote",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> promoteUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> promoteUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "toDomain", description = "toDomain", required = true) @Valid @RequestBody Domain toDomain,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false, defaultValue = "-1") Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1090,14 +1355,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/revert/{oldVersion}",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> revertToOldVersionUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> revertToOldVersionUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "oldVersion", description = "oldVersion", required = true, in = ParameterIn.PATH) @PathVariable("oldVersion") Integer oldVersion
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1128,13 +1405,25 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/show",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResource> showResourceUsingPUT(
+    default ResponseEntity<DataResponseResource> showResourceUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1165,15 +1454,27 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/resources/{domain}/{id}/lock",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> unlockResourceUsingDELETE(
+    default ResponseEntity<DataResponseResourceVersion> unlockResourceUsingDELETE(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "force", description = "When set to true, this will break a lock held by another user if the current user is a tenant admin.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "force", required = false, defaultValue = "false") Boolean force,
         @Parameter(name = "version", description = "version", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1208,16 +1509,28 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/content/{type}",
-        produces = "*/*",
-        consumes = "multipart/form-data"
+        produces = { "*/*" },
+        consumes = { "multipart/form-data" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> updateContentOfTypeViaFile(
+    default ResponseEntity<DataResponseResourceVersion> updateContentOfTypeViaFile(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "type", description = "type", required = true, in = ParameterIn.PATH) @PathVariable("type") String type,
         @Parameter(name = "file", description = "The binary file to upload.", required = true) @RequestPart(value = "file", required = true) MultipartFile file
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1251,15 +1564,27 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/content",
-        produces = "*/*",
-        consumes = "multipart/form-data"
+        produces = { "*/*" },
+        consumes = { "multipart/form-data" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> updateContentViaFileUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> updateContentViaFileUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "file", description = "The binary file to upload.", required = true) @RequestPart(value = "file", required = true) MultipartFile file
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1291,15 +1616,27 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> updateResourceUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> updateResourceUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "body", description = "body", required = true) @Valid @RequestBody Object body
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1331,15 +1668,27 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/resources/{domain}/{id}/state",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<DataResponseResourceVersion> updateStateUsingPUT(
+    default ResponseEntity<DataResponseResourceVersion> updateStateUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "stateRequest", description = "Resource states can be DRAFT, REVIEW, APPROVED, or REJECTED.", required = true) @Valid @RequestBody WorkflowRequestBody stateRequest
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf(""))) {
+                    String exampleString = "";
+                    ApiUtil.setExampleResponse(request, "", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1370,13 +1719,25 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/themes/{domain}/{themeId}/template",
-        produces = "*/*"
+        produces = { "*/*" }
     )
     
-    ResponseEntity<GenericResponse> updateTemplateUsingPUT(
+    default ResponseEntity<GenericResponse> updateTemplateUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "themeId", description = "themeId", required = true, in = ParameterIn.PATH) @PathVariable("themeId") UUID themeId
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                    String exampleString = "{ \"status\" : \"status\" }";
+                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 
     /**
@@ -1408,14 +1769,26 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/themes/{domain}/{themeId}",
-        produces = "*/*",
-        consumes = "application/json"
+        produces = { "*/*" },
+        consumes = { "application/json" }
     )
     
-    ResponseEntity<GenericResponse> updateThemeUsingPUT(
+    default ResponseEntity<GenericResponse> updateThemeUsingPUT(
         @Parameter(name = "domain", description = "domain", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "themeId", description = "themeId", required = true, in = ParameterIn.PATH) @PathVariable("themeId") UUID themeId,
         @Parameter(name = "theme", description = "theme", required = true) @Valid @RequestBody Theme theme
-    );
+    ) {
+        getRequest().ifPresent(request -> {
+            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
+                    String exampleString = "{ \"status\" : \"status\" }";
+                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
+                    break;
+                }
+            }
+        });
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+
+    }
 
 }
