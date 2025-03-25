@@ -41,14 +41,10 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:04:22.503697576Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:39:30.497323016Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "tenant-admin-controller", description = "the tenant-admin-controller API")
 public interface ApiApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * POST /api/v1/tenants/{tenantId}
@@ -68,24 +64,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantSchema(
+    ResponseEntity<DataResponseTenant> createTenantSchema(
         @Size(min = 1, max = 40) @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -106,25 +90,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/addTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
+    ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -157,25 +129,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/settings/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteSettingsByIdOrDomainId(
+    ResponseEntity<GenericResponse> deleteSettingsByIdOrDomainId(
         @Parameter(name = "id", description = "id of the setting to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
         @Parameter(name = "domainId", description = "domain for which settings must be deleted", in = ParameterIn.QUERY) @Valid @RequestParam(value = "domainId", required = false) String domainId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -208,25 +168,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/settings",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteSettingsByIdOrDomainId1(
+    ResponseEntity<GenericResponse> deleteSettingsByIdOrDomainId1(
         @Parameter(name = "id", description = "id of the setting to be deleted", required = true, in = ParameterIn.PATH) @PathVariable("id") String id,
         @Parameter(name = "domainId", description = "domain for which settings must be deleted", in = ParameterIn.QUERY) @Valid @RequestParam(value = "domainId", required = false) String domainId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -246,15 +194,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version/api",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> getApiVersion(
+    ResponseEntity<String> getApiVersion(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -275,24 +220,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> getTenant(
+    ResponseEntity<DataResponseTenant> getTenant(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -312,24 +245,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/configuration",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
+    ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"autoSchemaManagement\" : true }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -349,24 +270,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> getTenants(
+    ResponseEntity<ListResponseTenant> getTenants(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -386,24 +295,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<VersionConfig> getVersion(
+    ResponseEntity<VersionConfig> getVersion(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"patch\" : \"patch\", \"major\" : \"major\", \"minor\" : \"minor\", \"versionString\" : \"versionString\", \"apiIdentifier\" : \"apiIdentifier\", \"details\" : { \"git\" : { \"commits\" : \"commits\", \"tag\" : \"tag\", \"branch\" : \"branch\", \"hash\" : \"hash\" }, \"appName\" : \"appName\", \"buildNumber\" : \"buildNumber\", \"timestamp\" : \"timestamp\" }, \"clientVersion\" : \"clientVersion\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -424,15 +321,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/secrets/migrateVault",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Boolean> migrateVault(
+    ResponseEntity<Boolean> migrateVault(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -465,25 +359,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/setting-types/{typeId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseSettingType> retrieveSettingType(
+    ResponseEntity<DataResponseSettingType> retrieveSettingType(
         @Parameter(name = "typeId", description = "Setting type to retrieve. Allowed values are OTN, CORE_SIGNATURE.", required = true, in = ParameterIn.PATH) @PathVariable("typeId") String typeId,
         @Parameter(name = "loadSettings", description = "Flag to decide if associated settings must be loaded. Allowed values are true/false. Default value is false.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "loadSettings", required = false) String loadSettings
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"settings\" : [ { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" }, { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" } ], \"type\" : \"type\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -515,24 +397,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/setting-types",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseSettingType> retrieveSettingTypes(
+    ResponseEntity<ListResponseSettingType> retrieveSettingTypes(
         @Parameter(name = "loadSettings", description = "Flag to decide if associated settings must be loaded. Allowed values are true/false. Default value is false.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "loadSettings", required = false) String loadSettings
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"settings\" : [ { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" }, { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" } ], \"type\" : \"type\" }, { \"settings\" : [ { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" }, { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" } ], \"type\" : \"type\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -564,24 +434,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/settings",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseSettings> retrieveSettings(
+    ResponseEntity<ListResponseSettings> retrieveSettings(
         @Parameter(name = "domainId", description = "domain for which settings must be retrieved", in = ParameterIn.QUERY) @Valid @RequestParam(value = "domainId", required = false) String domainId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" }, { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -613,25 +471,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/settings",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<ListResponseSettings> saveSettings(
+    ResponseEntity<ListResponseSettings> saveSettings(
         @Parameter(name = "SetttingsList", description = "", required = true) @Valid @RequestBody SetttingsList setttingsList
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" }, { \"modifiedTime\" : \"2000-01-23T04:56:07.000+00:00\", \"settingDetails\" : { \"key\" : \"settingDetails\" }, \"modifiedBy\" : \"modifiedBy\", \"id\" : 0, \"type\" : \"UNKNOWN\", \"domainId\" : \"domainId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -652,25 +498,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/updateTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenant(
+    ResponseEntity<DataResponseTenant> updateTenant(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -691,24 +525,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/{tenantId}/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenantSchema(
+    ResponseEntity<DataResponseTenant> updateTenantSchema(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -728,23 +550,11 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/all/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> updateTenantSchemas(
+    ResponseEntity<ListResponseTenant> updateTenantSchemas(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 }

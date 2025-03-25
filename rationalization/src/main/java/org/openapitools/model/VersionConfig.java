@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * VersionConfig
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:04:36.667726893Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:40:32.411824350Z[Europe/Lisbon]")
 public class VersionConfig {
 
   private String apiIdentifier;

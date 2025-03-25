@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  * FlowModelContextFilter
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:03:17.210646522Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:33:52.003808146Z[Europe/Lisbon]")
 public class FlowModelContextFilter {
 
   @Valid

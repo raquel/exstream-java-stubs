@@ -32,14 +32,10 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:03:17.210646522Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:33:52.003808146Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "version-controller", description = "the version-controller API")
 public interface VersionApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * GET /version/api
@@ -58,15 +54,12 @@ public interface VersionApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/version/api",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> getApiVersion1(
+    ResponseEntity<String> getApiVersion1(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -86,23 +79,11 @@ public interface VersionApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/version",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<VersionConfig> getVersion(
+    ResponseEntity<VersionConfig> getVersion(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"patch\" : \"patch\", \"major\" : \"major\", \"minor\" : \"minor\", \"versionString\" : \"versionString\", \"apiIdentifier\" : \"apiIdentifier\", \"details\" : { \"git\" : { \"commits\" : \"commits\", \"tag\" : \"tag\", \"branch\" : \"branch\", \"hash\" : \"hash\" }, \"appName\" : \"appName\", \"buildNumber\" : \"buildNumber\", \"timestamp\" : \"timestamp\" } }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 }

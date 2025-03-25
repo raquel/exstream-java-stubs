@@ -32,14 +32,10 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:03:17.210646522Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:33:52.003808146Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "config-controller", description = "the config-controller API")
 public interface ConfigApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * GET /config
@@ -58,23 +54,11 @@ public interface ConfigApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/config",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<PublicOrcConfiguration> getConfig(
+    ResponseEntity<PublicOrcConfiguration> getConfig(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"baseSubscription\" : true, \"subscriptionEnabled\" : true, \"assuredDeliveryEnabled\" : true, \"flowScriptDebuggingEnabled\" : true }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 }

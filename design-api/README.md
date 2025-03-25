@@ -24,3 +24,12 @@ public interface PetClient extends PetApi {
 
 }
 ```
+
+RUN SERVER
+mvn spring-boot:run
+
+CLIENT
+java -jar openapi-generator-cli.jar generate -i exstream-ce-design-api-21-2-0.json -g spring -o design-api --library=spring-cloud --additional-properties=javaVersion=21,springBootVersion=3.1.0,dateLibrary=java8,interfaceOnly=false,useSpringBoot3=true,swaggerAnnotations=true
+
+SERVER
+java -jar openapi-generator-cli.jar generate -i exstream-ce-design-api-21-2-0.json -g spring -o design-api --additional-properties=javaVersion=21,springBootVersion=3.1.0,dateLibrary=java8,interfaceOnly=false,useSpringBoot3=true,swaggerAnnotations=true

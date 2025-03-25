@@ -9,6 +9,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -18,7 +19,7 @@ import jakarta.annotation.Generated;
  * Schema
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:02:16.213346402Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:31:49.764173764Z[Europe/Lisbon]")
 public class Schema {
 
   private String schemaId;
@@ -37,7 +38,7 @@ public class Schema {
    * @return schemaId
   */
   
-  @io.swagger.v3.oas.annotations.media.Schema(name = "schemaId", requiredMode = io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "schemaId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("schemaId")
   public String getSchemaId() {
     return schemaId;
@@ -57,7 +58,7 @@ public class Schema {
    * @return latestSchemaChangeLogEntry
   */
   @Valid 
-  @io.swagger.v3.oas.annotations.media.Schema(name = "latestSchemaChangeLogEntry", requiredMode = io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "latestSchemaChangeLogEntry", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("latestSchemaChangeLogEntry")
   public SchemaChangeLogEntry getLatestSchemaChangeLogEntry() {
     return latestSchemaChangeLogEntry;
@@ -77,7 +78,7 @@ public class Schema {
    * @return schemaMissingFromDatabase
   */
   
-  @io.swagger.v3.oas.annotations.media.Schema(name = "schemaMissingFromDatabase", requiredMode = io.swagger.v3.oas.annotations.media.Schema.RequiredMode.NOT_REQUIRED)
+  @Schema(name = "schemaMissingFromDatabase", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("schemaMissingFromDatabase")
   public Boolean getSchemaMissingFromDatabase() {
     return schemaMissingFromDatabase;

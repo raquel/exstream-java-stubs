@@ -19,7 +19,7 @@ import jakarta.annotation.Generated;
  * DataResponseSettingType
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:04:22.503697576Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:39:30.497323016Z[Europe/Lisbon]")
 public class DataResponseSettingType {
 
   private String status;

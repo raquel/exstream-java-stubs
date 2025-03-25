@@ -85,14 +85,10 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:03:17.210646522Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:33:52.003808146Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "configuration-controller", description = "the configuration-controller API")
 public interface ApiApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * POST /api/v1/configuration/{domainId}
@@ -113,26 +109,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/configuration/{domainId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseConfiguration> addConfiguration(
+    ResponseEntity<DataResponseConfiguration> addConfiguration(
         @Size(min = 1, max = 255) @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "ModelConfiguration", description = "", required = true) @Valid @RequestBody ModelConfiguration modelConfiguration
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"configName\" : \"configName\", \"configDetails\" : { \"key\" : { \"values\" : [ { }, { } ], \"secretId\" : \"secretId\", \"value\" : \"value\" } }, \"active\" : true, \"configType\" : \"configType\", \"domainId\" : \"domainId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -156,25 +140,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/ssh/known-hosts/hostkey",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> addKeyForHost(
+    ResponseEntity<GenericResponse> addKeyForHost(
         @Parameter(name = "HostKey", description = "hostkey", required = true) @Valid @RequestBody HostKey hostKey
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -199,26 +171,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/cron-jobs/{domain}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseCronJob> addSchedule(
+    ResponseEntity<DataResponseCronJob> addSchedule(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "CronJob", description = "Cron job. It can apply to jobs or sort assets.<br/>name: Name of the cron job<br/>cronExpression: Cron expression in UNIX format that reflects when the cron job should be executed (the main cron orchestration cleanup job is executed hourly by default)<br/>cronType: Cron job type. Available values: markDeleted,wipe,startJob,updateExpirationTime,wipeSortingAssets,expireSortingAssets,sortingAndBundling. When wipe is selected the filter parameters are not used.<br/>startDateStart: Filter jobs matching started date after this date or sort assets created after this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today.<br/>startDateEnd: Filter jobs matching started date before this date or sort assets created before this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today.<br/>endDateStart: Filter jobs matching ended date after this date or sort assets modified after this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today<br/>endDateEnd: Filter jobs matching ended date before this date or sort assets modified before this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today<br/>statuses: Match jobs with any of these statuses. Possible values for jobs: complete,error,canceled,deleted<br/>sortingAssetStatuses: Match sorting assets with any of these statuses, possible values for sort assets: processed,waiting,expired,canceled<br/>serviceName: service to trigger for job<br/>channelName: input channel for pulling data<br/>inputPath: path parameter for the input channel<br/>headers: map of headers for starting job<br/>cacheTimeout: optional duration of file cache<br/>mode: Filter jobs matching this mode (ONDEMAND|BATCH)<br/>flowModelId: Filter sorting assets matching flow model id<br/>communicationIdList: Filter sorting assets matching the communication id (only one) or when running sorting&bundling with appConsolidation equal to true, use the specified communications,<br/>when appConsolidation is false, only one communication id should be present<br/>preSortQueueName: Filter sorting assets matching pre sort queue name<br/>jobId: Filter sorting assets matching jobId<br/>postSortQueueName: queue name used in the post sort queue name<br/>appConsolidation: says whether multiple communications should be consolidated when running sorting&bundling<br/>enabled: Determines whether the cron job should be triggered or not. Default value: true", required = true) @Valid @RequestBody CronJob cronJob
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"dryRun\" : true, \"jobAvailable\" : true, \"endDateStart\" : \"endDateStart\", \"startDateEnd\" : \"startDateEnd\", \"enabled\" : true, \"mode\" : \"BATCH\", \"cronType\" : \"markDeleted\", \"sortingAssetStatuses\" : [ \"processed\", \"processed\" ], \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"appConsolidation\" : true, \"headers\" : { \"key\" : \"headers\" }, \"endDateEnd\" : \"endDateEnd\", \"serviceName\" : \"serviceName\", \"domainId\" : \"domainId\", \"communicationIdList\" : [ \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" ], \"cronExpression\" : \"cronExpression\", \"startDateStart\" : \"startDateStart\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"cacheTimeout\" : 0.8008282, \"inputPath\" : \"inputPath\", \"preSortQueueName\" : \"preSortQueueName\", \"name\" : \"name\", \"statuses\" : [ \"canceled\", \"canceled\" ], \"channelName\" : \"channelName\", \"postSortQueueName\" : \"postSortQueueName\" }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -241,15 +201,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/runtime/cache",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> cleanCache(
+    ResponseEntity<String> cleanCache(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -272,24 +229,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/ssh/known-hosts",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> clearKnownHosts(
+    ResponseEntity<GenericResponse> clearKnownHosts(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -310,24 +255,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantSchema(
+    ResponseEntity<DataResponseTenant> createTenantSchema(
         @Size(min = 1, max = 40) @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -348,25 +281,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/addTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
+    ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -389,26 +310,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/configuration/{domainId}/{configType}/{configName}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteConfiguration(
+    ResponseEntity<GenericResponse> deleteConfiguration(
         @Size(min = 1, max = 255) @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "configType", description = "Specify the configuration type.", required = true, in = ParameterIn.PATH) @PathVariable("configType") String configType,
         @Parameter(name = "configName", description = "Specify the configuration name.", required = true, in = ParameterIn.PATH) @PathVariable("configName") String configName
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -430,25 +339,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteFlowInstance(
+    ResponseEntity<GenericResponse> deleteFlowInstance(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -474,17 +371,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/runtime/{domain}/jobs/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Void> deleteJob(
+    ResponseEntity<Void> deleteJob(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Job id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "force", description = "Force deletion of job entry in the database repository in case deletion of one or more files in the job working directory failed.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "force", required = false, defaultValue = "false") Boolean force
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -519,28 +413,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/runtime/{domain}/jobs",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseJobDeleteStatus> deleteJobs(
+    ResponseEntity<DataResponseJobDeleteStatus> deleteJobs(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "force", description = "Force deletion of job entry in the database repository in case deletion of one or more files in the job working directory failed.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "force", required = false, defaultValue = "false") Boolean force,
         @Parameter(name = "syncDelete", description = "Delete jobs and all job files synchronously. In case we run it asynchronously, the jobs will be marked as deleted and will be deleted asynchronously by an external job. This parameter only is available when using the key 'ids' in the filter.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "syncDelete", required = false, defaultValue = "false") Boolean syncDelete,
         @Parameter(name = "JobFilterRequest", description = "") @Valid @RequestBody(required = false) JobFilterRequest jobFilterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"failedDeleteJobs\" : { \"key\" : \"failedDeleteJobs\" }, \"successDeleteJobs\" : 0 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -563,25 +445,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/cron-jobs/{domain}/{cronJobId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteSchedule(
+    ResponseEntity<GenericResponse> deleteSchedule(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "cronJobId", description = "CronJobId", required = true, in = ParameterIn.PATH) @PathVariable("cronJobId") UUID cronJobId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -606,26 +476,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/sortdata/{domain}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> deleteSortData(
+    ResponseEntity<GenericResponse> deleteSortData(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "SortingDataFilterRequest", description = "") @Valid @RequestBody(required = false) SortingDataFilterRequest sortingDataFilterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -650,25 +508,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/sortdata/{domain}/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> deleteSortData1(
+    ResponseEntity<GenericResponse> deleteSortData1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -688,15 +534,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version/api",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> getApiVersion(
+    ResponseEntity<String> getApiVersion(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -716,24 +559,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/config",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<PublicOrcConfiguration> getConfig1(
+    ResponseEntity<PublicOrcConfiguration> getConfig1(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"baseSubscription\" : true, \"subscriptionEnabled\" : true, \"assuredDeliveryEnabled\" : true, \"flowScriptDebuggingEnabled\" : true }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -756,26 +587,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/configuration/{domainId}/{configType}/{configName}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ModelConfiguration> getConfiguration(
+    ResponseEntity<ModelConfiguration> getConfiguration(
         @Size(min = 1, max = 255) @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "configType", description = "Specify the configuration type.", required = true, in = ParameterIn.PATH) @PathVariable("configType") String configType,
         @Parameter(name = "configName", description = "Specify the configuration name.", required = true, in = ParameterIn.PATH) @PathVariable("configName") String configName
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"configName\" : \"configName\", \"configDetails\" : { \"key\" : { \"values\" : [ { }, { } ], \"secretId\" : \"secretId\", \"value\" : \"value\" } }, \"active\" : true, \"configType\" : \"configType\", \"domainId\" : \"domainId\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -800,25 +619,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/configuration/{domainId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseConfiguration> getConfigurations(
+    ResponseEntity<PageResponseConfiguration> getConfigurations(
         @NotNull @Parameter(name = "filterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | filter name          | Filter value description                                                                                       | |----------------------|----------------------------------------------------------------------------------------------------------------| | configType           | Match configurations with this configType.                                                                     | | configName           | Match configurations with this configName.                                                                     |", required = true, in = ParameterIn.QUERY) @Valid ConfigurationFilterRequest filterRequest,
         @Size(min = 1, max = 255) @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"configName\" : \"configName\", \"configDetails\" : { \"key\" : { \"values\" : [ { }, { } ], \"secretId\" : \"secretId\", \"value\" : \"value\" } }, \"active\" : true, \"configType\" : \"configType\", \"domainId\" : \"domainId\" }, { \"configName\" : \"configName\", \"configDetails\" : { \"key\" : { \"values\" : [ { }, { } ], \"secretId\" : \"secretId\", \"value\" : \"value\" } }, \"active\" : true, \"configType\" : \"configType\", \"domainId\" : \"domainId\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -844,14 +651,11 @@ public interface ApiApi {
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/customer-artifacts/{customerId}"
     )
     
-    default ResponseEntity<Void> getCustomerOutputArtifacts(
+    ResponseEntity<Void> getCustomerOutputArtifacts(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Size(min = 1, max = 512) @Parameter(name = "customerId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("customerId") String customerId
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -874,26 +678,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/delivery-file/output-files",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseString> getDeliveryFileOutputFiles(
+    ResponseEntity<PageResponseString> getDeliveryFileOutputFiles(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @NotNull @Parameter(name = "pageRequest", description = "", required = true, in = ParameterIn.QUERY) @Valid SimplePageRequest pageRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ \"data\", \"data\" ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -915,25 +707,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/delivery-file/outputs",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseJsonNode> getDeliveryFileOutputs(
+    ResponseEntity<DataResponseJsonNode> getDeliveryFileOutputs(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -956,17 +736,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/artifact/{artifactName}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Object> getDeliveryFileOutputs1(
+    ResponseEntity<Object> getDeliveryFileOutputs1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Size(min = 1, max = 512) @Parameter(name = "artifactName", description = "", required = true, in = ParameterIn.PATH) @PathVariable("artifactName") String artifactName
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -991,25 +768,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-model-contexts/{domain}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseFlowModelContextSnapshot> getFilteredContexts(
+    ResponseEntity<PageResponseFlowModelContextSnapshot> getFilteredContexts(
         @NotNull @Parameter(name = "filterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | filter name          | Filter value description                                                                                       | |----------------------|----------------------------------------------------------------------------------------------------------------| | snapshotIds          | Match contexts with snapshotIds in this comma-separated list.                                                  | | dasIds               | Match snapshots created from any of these das ids.                                                             | | dasVersions          | Match snapshots where das version of original flow model is in this list. Useful with a singular id in dasIds. | | searchString         | Match snapshots with names matching this string.                                                               | | caseSensitive        | Specify if searches are case sensitive or not.                                                                 | | wholeWord            | Specify if searches match whole word or not.                                                                   |", required = true, in = ParameterIn.QUERY) @Valid FlowModelContextFilterRequest filterRequest,
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" }, { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1032,26 +797,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowInstance> getFlowInstance(
+    ResponseEntity<DataResponseFlowInstance> getFlowInstance(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "checkArtifacts", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "checkArtifacts", required = false, defaultValue = "false") Boolean checkArtifacts
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"msg\" : \"msg\", \"flowModelSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"inputRetrievable\" : true, \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"executingLongRunningOp\" : true, \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1075,25 +828,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}/collection-resources",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseString> getFlowInstanceCollectionResources(
+    ResponseEntity<ListResponseString> getFlowInstanceCollectionResources(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ \"data\", \"data\" ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1116,17 +857,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}/input",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Object> getFlowInstanceInput(
+    ResponseEntity<Object> getFlowInstanceInput(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "download", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "download", required = false, defaultValue = "false") Boolean download
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1151,25 +889,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-instances",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseFlowInstance> getFlowInstances(
+    ResponseEntity<PageResponseFlowInstance> getFlowInstances(
         @NotNull @Parameter(name = "filterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | filter name            | Filter value description                                                                               | |------------------------|--------------------------------------------------------------------------------------------------------| | ids                    | Match flow instances with ids in this comma-separated list.                                            | | flowModelId            | Match flow instances spawned from this flow model id (deprecated).                                     | | flowModelIds           | Match flow instances spawned from these flow model ids.(Note: When used along with flowModelId filter, ids from both filters are applied.)| | flowModelSnapshotIds   | Match flow instances spawned from any of these flow model snapshot ids.                                | | jobId                  | Match flow instances that ran as part of this job.                                                     | | externalId             | Match flow instances associated to this external id.                                                   | | statuses               | Match flow instances with any of these statuses. Possible values: canceled,started,complete,error,waiting,holding| | expiringDateStart      | Match flow instances expiring after this date. (yyyy-MM-dd format)                                     | | expiringDateEnd        | Match flow instances expiring before this date. (yyyy-MM-dd format)                                    | | flowModelTypes         | Match flow instances with any of these flow model types. Possible values: COMMUNICATION,ALERT,NOTIFICATION| | startDateStart         | Match flow instances started after this date. (yyyy-MM-dd format)                                      | | startDateEnd           | Match flow instances started before this date. (yyyy-MM-dd format)                                     | | endDateStart           | Match flow instances ended after this date. (yyyy-MM-dd format)                                        | | endDateEnd             | Match flow instances ended before this date. (yyyy-MM-dd format)                                       | | executingLongRunningOp | Match flow instances which are executing a long-running operation                                      |", required = true, in = ParameterIn.QUERY) @Valid FlowInstanceFilterRequest filterRequest,
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"msg\" : \"msg\", \"flowModelSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"inputRetrievable\" : true, \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"executingLongRunningOp\" : true, \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, { \"msg\" : \"msg\", \"flowModelSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"inputRetrievable\" : true, \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"executingLongRunningOp\" : true, \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1191,26 +917,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-instances/associated-jobs",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseFlowInstancesAndAssociatedJobs> getFlowInstancesAndAssociatedJobs(
+    ResponseEntity<DataResponseFlowInstancesAndAssociatedJobs> getFlowInstancesAndAssociatedJobs(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "FlowInstanceFilterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | filter name            | Filter value description                                                                               | |------------------------|--------------------------------------------------------------------------------------------------------| | ids                    | Match flow instances with ids in this comma-separated list.                                            | | flowModelId            | Match flow instances spawned from this flow model id (deprecated).                                     | | flowModelIds           | Match flow instances spawned from these flow model ids.(Note: When used along with flowModelId filter, ids from both filters are applied.)| | flowModelSnapshotIds   | Match flow instances spawned from any of these flow model snapshot ids.                                | | jobId                  | Match flow instances that ran as part of this job.                                                     | | externalId             | Match flow instances associated to this external id.                                                   | | statuses               | Match flow instances with any of these statuses. Possible values: canceled,started,complete,error,waiting,holding| | expiringDateStart      | Match flow instances expiring after this date. (yyyy-MM-dd format)                                     | | expiringDateEnd        | Match flow instances expiring before this date. (yyyy-MM-dd format)                                    | | flowModelTypes         | Match flow instances with any of these flow model types. Possible values: COMMUNICATION,ALERT,NOTIFICATION| | startDateStart         | Match flow instances started after this date. (yyyy-MM-dd format)                                      | | startDateEnd           | Match flow instances started before this date. (yyyy-MM-dd format)                                     | | endDateStart           | Match flow instances ended after this date. (yyyy-MM-dd format)                                        | | endDateEnd             | Match flow instances ended before this date. (yyyy-MM-dd format)                                       | | executingLongRunningOp | Match flow instances which are executing a long-running operation                                      |", required = true) @Valid @RequestBody FlowInstanceFilterRequest flowInstanceFilterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"flowInstances\" : { \"data\" : [ { \"msg\" : \"msg\", \"flowModelSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"inputRetrievable\" : true, \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"executingLongRunningOp\" : true, \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, { \"msg\" : \"msg\", \"flowModelSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"inputRetrievable\" : true, \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"executingLongRunningOp\" : true, \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }, \"jobs\" : { \"key\" : { \"msg\" : \"msg\", \"aggregatedFMCSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"channel\" : \"channel\", \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"mode\" : \"BATCH\", \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"triggeredBy\" : \"triggeredBy\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } } }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1235,26 +949,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-instances/counts",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseMapObjectObject> getFlowInstancesCounts(
+    ResponseEntity<DataResponseMapObjectObject> getFlowInstancesCounts(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "FlowInstanceCountsFilterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | Filter name          | Filter value description                                                                                             | |----------------------|----------------------------------------------------------------------------------------------------------------------| | flowModelIds         | Match flow instances spawned from these flow model ids.                                                              | | startDateStart       | Match flow instances started after this date. (yyyy-MM-ddThh:mm:ss.SSSZ format)                                      | | startDateEnd         | Match flow instances started before this date. (yyyy-MM-ddThh:mm:ss.SSSZ format)                                     | | fillMissingData      | Populate any missing data between grouped data ranges. If data is not found, counts would be returned as 0           |", required = true) @Valid @RequestBody FlowInstanceCountsFilterRequest flowInstanceCountsFilterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"key\" : \"{}\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1276,25 +978,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-model-snapshots/{snapshotId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowModelSnapshot> getFlowModelSnapshot(
+    ResponseEntity<DataResponseFlowModelSnapshot> getFlowModelSnapshot(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "snapshotId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("snapshotId") UUID snapshotId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"dasVersion\" : 0, \"publishedBy\" : \"publishedBy\", \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"domain\" : \"domain\", \"name\" : \"name\", \"publishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"unpublishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"description\" : \"description\", \"content\" : [ \"content\", \"content\" ], \"dasId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1316,25 +1006,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-model-snapshots",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseFlowModelSnapshot> getFlowModelSnapshots(
+    ResponseEntity<PageResponseFlowModelSnapshot> getFlowModelSnapshots(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @NotNull @Parameter(name = "filterRequest", description = "", required = true, in = ParameterIn.QUERY) @Valid FlowModelSnapshotFilterRequest filterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"dasVersion\" : 0, \"publishedBy\" : \"publishedBy\", \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"domain\" : \"domain\", \"name\" : \"name\", \"publishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"unpublishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"description\" : \"description\", \"content\" : [ \"content\", \"content\" ], \"dasId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" }, { \"dasVersion\" : 0, \"publishedBy\" : \"publishedBy\", \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"domain\" : \"domain\", \"name\" : \"name\", \"publishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"unpublishDate\" : \"2000-01-23T04:56:07.000+00:00\", \"description\" : \"description\", \"content\" : [ \"content\", \"content\" ], \"dasId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1357,26 +1035,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowStep> getFlowStep(
+    ResponseEntity<DataResponseFlowStep> getFlowStep(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "checkArtifacts", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "checkArtifacts", required = false, defaultValue = "false") Boolean checkArtifacts
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"msg\" : \"msg\", \"stepType\" : \"input\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"displayName\" : \"displayName\", \"previousStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"externalId\" : \"externalId\", \"flowInstanceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"stepName\" : \"stepName\", \"queueDate\" : \"2000-01-23T04:56:07.000+00:00\", \"executeDate\" : \"2000-01-23T04:56:07.000+00:00\", \"deliveryFileRetrievable\" : true, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"messageFileRetrievable\" : true, \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1400,25 +1066,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/collection-resources",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseString> getFlowStepCollectionResources(
+    ResponseEntity<ListResponseString> getFlowStepCollectionResources(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ \"data\", \"data\" ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1441,17 +1095,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/delivery-file",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Object> getFlowStepDeliveryFile(
+    ResponseEntity<Object> getFlowStepDeliveryFile(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "download", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "download", required = false, defaultValue = "false") Boolean download
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1473,25 +1124,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/flow",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowStepFlow> getFlowStepFlow(
+    ResponseEntity<DataResponseFlowStepFlow> getFlowStepFlow(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"flowSteps\" : [ { \"msg\" : \"msg\", \"stepType\" : \"input\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"displayName\" : \"displayName\", \"previousStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"externalId\" : \"externalId\", \"flowInstanceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"stepName\" : \"stepName\", \"queueDate\" : \"2000-01-23T04:56:07.000+00:00\", \"executeDate\" : \"2000-01-23T04:56:07.000+00:00\", \"deliveryFileRetrievable\" : true, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"messageFileRetrievable\" : true, \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, { \"msg\" : \"msg\", \"stepType\" : \"input\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"displayName\" : \"displayName\", \"previousStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"externalId\" : \"externalId\", \"flowInstanceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"stepName\" : \"stepName\", \"queueDate\" : \"2000-01-23T04:56:07.000+00:00\", \"executeDate\" : \"2000-01-23T04:56:07.000+00:00\", \"deliveryFileRetrievable\" : true, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"messageFileRetrievable\" : true, \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } ], \"inputChannel\" : \"inputChannel\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1514,17 +1153,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/message-file",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Object> getFlowStepMessageFile(
+    ResponseEntity<Object> getFlowStepMessageFile(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "download", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "download", required = false, defaultValue = "false") Boolean download
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1550,26 +1186,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/flow-steps",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseFlowStep> getFlowSteps(
+    ResponseEntity<PageResponseFlowStep> getFlowSteps(
         @NotNull @Parameter(name = "filterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. Keys include: | filter name             | Filter value description                                                                       | |-------------------------|------------------------------------------------------------------------------------------------| | ids                     | Match flow steps with ids in this comma-separated list.                                        | | stepName                | Match resources with this stepName                                                             | | externalId              | Match flow steps associated to this external id.                                               | | previousStepId          | Match flow steps having this flow step as previous step id                                     | | flowInstanceId          | Match flow steps belonging to this flow instance                                               | | caseSensitive           | Specify if searches (stepName, displayName, externalId) are case sensitive or not.             | | statuses                | Match flow steps with any of these statuses. Possible values: canceled,created,waiting,holding,started,executed,complete,error| | stepTypes               | Match flow steps with any of these types. Possible values: input,communication,output,decider,processor,delay,hold,externalFlow,aggregator| | startDateStart          | Match flow steps started after this date. (yyyy-MM-dd format)                                  | | startDateEnd            | Match flow steps started before this date. (yyyy-MM-dd format)                                 | | endDateStart            | Match flow steps ended after this date. (yyyy-MM-dd format)                                    | | endDateEnd              | Match flow steps ended before this date. (yyyy-MM-dd format)                                   | | expiringDateStart       | Match flow steps expiring after this date. (yyyy-MM-dd format)                                 | | expiringDateEnd         | Match flow steps expiring before this date. (yyyy-MM-dd format)                                | | queueDateStart          | Match flow steps started after this date. (yyyy-MM-dd format)                                  | | queueDateEnd            | Match flow steps started before this date. (yyyy-MM-dd format)                                 | | executeDateStart        | Match flow steps ended after this date. (yyyy-MM-dd format)                                    | | executeDateEnd          | Match flow steps ended before this date. (yyyy-MM-dd format)                                   | | deliveryFileRetrievable | Match flow steps that have retrievable delivery files                                          | | displayName             | Match flow steps with this display name                                                        |", required = true, in = ParameterIn.QUERY) @Valid FlowStepFilterRequest filterRequest,
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "checkArtifacts", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "checkArtifacts", required = false, defaultValue = "false") Boolean checkArtifacts
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"msg\" : \"msg\", \"stepType\" : \"input\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"displayName\" : \"displayName\", \"previousStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"externalId\" : \"externalId\", \"flowInstanceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"stepName\" : \"stepName\", \"queueDate\" : \"2000-01-23T04:56:07.000+00:00\", \"executeDate\" : \"2000-01-23T04:56:07.000+00:00\", \"deliveryFileRetrievable\" : true, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"messageFileRetrievable\" : true, \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, { \"msg\" : \"msg\", \"stepType\" : \"input\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"displayName\" : \"displayName\", \"previousStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"externalId\" : \"externalId\", \"flowInstanceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"stepName\" : \"stepName\", \"queueDate\" : \"2000-01-23T04:56:07.000+00:00\", \"executeDate\" : \"2000-01-23T04:56:07.000+00:00\", \"deliveryFileRetrievable\" : true, \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"messageFileRetrievable\" : true, \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1591,25 +1215,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/jobs/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseJob> getJob(
+    ResponseEntity<DataResponseJob> getJob(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"msg\" : \"msg\", \"aggregatedFMCSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"channel\" : \"channel\", \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"mode\" : \"BATCH\", \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"triggeredBy\" : \"triggeredBy\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1635,26 +1247,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/runtime/{domain}/jobs",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<PageResponseJob> getJobs(
+    ResponseEntity<PageResponseJob> getJobs(
         @NotNull @Parameter(name = "filterRequest", description = "The filter value is a semicolon delimited list of key value pairs. List values separate possible values with commas. In deletion, if ids are used as key, the other keys are ignored. Keys include: | filter name             | Filter value description                                                                           | |-------------------------|----------------------------------------------------------------------------------------------------| | ids                     | Match jobs with ids in this comma-separated list. For deletion, the maximum number of ids is 100   | | channel                 | Match jobs using this channel                                                                      | | externalId              | Match jobs associated to this external id.                                                         | | triggeredBy             | Match jobs triggered by this user                                                                  | | statuses                | Match jobs with any of these statuses. Possible values: started,complete,error,waiting,holding,canceled,deleted| | startDateStart          | Match jobs started after this date. (yyyy-MM-dd format)                                            | | startDateEnd            | Match jobs started before this date. (yyyy-MM-dd format)                                           | | endDateStart            | Match jobs ended after this date. (yyyy-MM-dd format)                                              | | endDateEnd              | Match jobs ended before this date. (yyyy-MM-dd format)                                             | | expiringDateStart       | Match jobs expiring after this date. (yyyy-MM-dd format)                                           | | expiringDateEnd         | Match jobs expiring before this date. (yyyy-MM-dd format)                                          | | mode                    | Match jobs with modes in this list. Modes include: BATCH,ONDEMAND                      | | aggregatedFMCSnapshotIds| Match jobs with any of these aggregated flow context snapshot ids.                                 | | flowModelTypes          | Match jobs with any of these flowModelTypes. Possible values:COMMUNICATION,ALERT      |", required = true, in = ParameterIn.QUERY) @Valid JobFilterRequest filterRequest,
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "fetchDeleted", description = "Show deleted jobs. If set to true, other states are ignored and only deleted jobs are returned.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "fetchDeleted", required = false, defaultValue = "false") Boolean fetchDeleted
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"msg\" : \"msg\", \"aggregatedFMCSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"channel\" : \"channel\", \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"mode\" : \"BATCH\", \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"triggeredBy\" : \"triggeredBy\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" }, { \"msg\" : \"msg\", \"aggregatedFMCSnapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"endDate\" : \"2000-01-23T04:56:07.000+00:00\", \"channel\" : \"channel\", \"externalId\" : \"externalId\", \"domainId\" : \"domainId\", \"mode\" : \"BATCH\", \"flowModelType\" : \"COMMUNICATION\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"startDate\" : \"2000-01-23T04:56:07.000+00:00\", \"status\" : \"canceled\", \"triggeredBy\" : \"triggeredBy\", \"expirationDate\" : \"2000-01-23T04:56:07.000+00:00\" } ], \"page\" : { \"pageOffset\" : 6, \"totalPages\" : 5, \"currentPageNumber\" : 5, \"pageSize\" : 0, \"totalElements\" : 1 }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1679,25 +1279,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/ssh/known-hosts/hostkey",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> getKeyForHost(
+    ResponseEntity<GenericResponse> getKeyForHost(
         @NotNull @Parameter(name = "host", description = "Specifies host name", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "host", required = true) String host,
         @Parameter(name = "port", description = "Specifies port", in = ParameterIn.QUERY) @Valid @RequestParam(value = "port", required = false, defaultValue = "22") Integer port
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1721,24 +1309,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/plugins",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseMapStringPlugin> getPlugins(
+    ResponseEntity<DataResponseMapStringPlugin> getPlugins(
         @Parameter(name = "locale", description = "Requested localization for plugins if available. Will return base localization otherwise.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "locale", required = false) String locale
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"key\" : { \"iconType\" : \"iconType\", \"custom\" : true, \"icon\" : \"icon\", \"description\" : \"description\", \"id\" : \"id\", \"label\" : \"label\", \"locale\" : \"locale\", \"version\" : \"version\", \"config\" : { \"secureChannelHostVerificationRequired\" : [ \"secureChannelHostVerificationRequired\", \"secureChannelHostVerificationRequired\" ], \"authenticationProvided\" : true, \"analyticsSupported\" : true, \"outcomeMappingSupported\" : true, \"additionalFilesInputHandlingOnly\" : true, \"validators\" : \"{}\", \"restrictedUseDefault\" : true, \"outcomeMappingRequired\" : true, \"assuredDeliverySupported\" : true, \"jobExpirationSupported\" : true, \"steps\" : [ { \"visible\" : \"visible\", \"id\" : \"id\", \"title\" : \"title\", \"properties\" : [ { \"headers\" : true, \"visible\" : \"visible\", \"defaultValue\" : \"defaultValue\", \"validators\" : [ \"validators\", \"validators\" ], \"validator\" : \"validator\", \"dynamicOptions\" : { \"filter\" : \"filter\", \"type\" : \"type\" }, \"label\" : \"label\", \"type\" : \"type\", \"rows\" : 5, \"maxListRows\" : 1, \"required\" : true, \"instruction\" : \"instruction\", \"options\" : [ { \"id\" : \"id\", \"label\" : \"label\" }, { \"id\" : \"id\", \"label\" : \"label\" } ], \"migration\" : { \"format\" : \"format\", \"source\" : \"source\" }, \"disabled\" : true, \"id\" : \"id\", \"placeholder\" : \"placeholder\", \"minListRows\" : 6, \"maxLength\" : 0 }, { \"headers\" : true, \"visible\" : \"visible\", \"defaultValue\" : \"defaultValue\", \"validators\" : [ \"validators\", \"validators\" ], \"validator\" : \"validator\", \"dynamicOptions\" : { \"filter\" : \"filter\", \"type\" : \"type\" }, \"label\" : \"label\", \"type\" : \"type\", \"rows\" : 5, \"maxListRows\" : 1, \"required\" : true, \"instruction\" : \"instruction\", \"options\" : [ { \"id\" : \"id\", \"label\" : \"label\" }, { \"id\" : \"id\", \"label\" : \"label\" } ], \"migration\" : { \"format\" : \"format\", \"source\" : \"source\" }, \"disabled\" : true, \"id\" : \"id\", \"placeholder\" : \"placeholder\", \"minListRows\" : 6, \"maxLength\" : 0 } ] }, { \"visible\" : \"visible\", \"id\" : \"id\", \"title\" : \"title\", \"properties\" : [ { \"headers\" : true, \"visible\" : \"visible\", \"defaultValue\" : \"defaultValue\", \"validators\" : [ \"validators\", \"validators\" ], \"validator\" : \"validator\", \"dynamicOptions\" : { \"filter\" : \"filter\", \"type\" : \"type\" }, \"label\" : \"label\", \"type\" : \"type\", \"rows\" : 5, \"maxListRows\" : 1, \"required\" : true, \"instruction\" : \"instruction\", \"options\" : [ { \"id\" : \"id\", \"label\" : \"label\" }, { \"id\" : \"id\", \"label\" : \"label\" } ], \"migration\" : { \"format\" : \"format\", \"source\" : \"source\" }, \"disabled\" : true, \"id\" : \"id\", \"placeholder\" : \"placeholder\", \"minListRows\" : 6, \"maxLength\" : 0 }, { \"headers\" : true, \"visible\" : \"visible\", \"defaultValue\" : \"defaultValue\", \"validators\" : [ \"validators\", \"validators\" ], \"validator\" : \"validator\", \"dynamicOptions\" : { \"filter\" : \"filter\", \"type\" : \"type\" }, \"label\" : \"label\", \"type\" : \"type\", \"rows\" : 5, \"maxListRows\" : 1, \"required\" : true, \"instruction\" : \"instruction\", \"options\" : [ { \"id\" : \"id\", \"label\" : \"label\" }, { \"id\" : \"id\", \"label\" : \"label\" } ], \"migration\" : { \"format\" : \"format\", \"source\" : \"source\" }, \"disabled\" : true, \"id\" : \"id\", \"placeholder\" : \"placeholder\", \"minListRows\" : 6, \"maxLength\" : 0 } ] } ], \"additionalFilesInputHandlingSupported\" : true }, \"group\" : \"group\", \"uiComponent\" : \"uiComponent\" } }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1767,25 +1343,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-model-contexts/{domain}/published/{flowModelContextId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowModelContextSnapshot> getPublished(
+    ResponseEntity<DataResponseFlowModelContextSnapshot> getPublished(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelContextId", description = "Flow context id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelContextId") UUID flowModelContextId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1810,25 +1374,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/sortdata/{domain}/{id}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseSortingAsset> getSortingAsset(
+    ResponseEntity<DataResponseSortingAsset> getSortingAsset(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"metadata\" : \"metadata\", \"communicationId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"sortSubflow\" : \"sortSubflow\", \"externalId\" : \"externalId\", \"subpackageIds\" : \"subpackageIds\", \"flowStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"creationDate\" : \"2000-01-23T04:56:07.000+00:00\", \"referenceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"lastModificationDate\" : \"2000-01-23T04:56:07.000+00:00\", \"queueName\" : \"queueName\", \"customersCount\" : 0, \"subPackageIds\" : \"subPackageIds\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"state\" : \"processed\", \"engineInfo\" : \"engineInfo\" }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1851,16 +1403,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/sortdata/{domain}/{id}/content",
-        produces = { "application/exstream-sort-index" }
+        produces = "application/exstream-sort-index"
     )
     
-    default ResponseEntity<Void> getSortingAssetContent(
+    ResponseEntity<Void> getSortingAssetContent(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1881,24 +1430,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> getTenant(
+    ResponseEntity<DataResponseTenant> getTenant(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1918,24 +1455,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/configuration",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
+    ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"autoSchemaManagement\" : true }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1955,24 +1480,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> getTenants(
+    ResponseEntity<ListResponseTenant> getTenants(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1992,24 +1505,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<VersionConfig> getVersion1(
+    ResponseEntity<VersionConfig> getVersion1(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"patch\" : \"patch\", \"major\" : \"major\", \"minor\" : \"minor\", \"versionString\" : \"versionString\", \"apiIdentifier\" : \"apiIdentifier\", \"details\" : { \"git\" : { \"commits\" : \"commits\", \"tag\" : \"tag\", \"branch\" : \"branch\", \"hash\" : \"hash\" }, \"appName\" : \"appName\", \"buildNumber\" : \"buildNumber\", \"timestamp\" : \"timestamp\" } }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2035,26 +1536,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-models/{domain}/{flowModelId}/deletable",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseDeletableResource> isDeletable(
+    ResponseEntity<DataResponseDeletableResource> isDeletable(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelId", description = "Flow model id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelId") UUID flowModelId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, any version will match.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"deletable\" : true }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2080,26 +1569,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-model-contexts/{domain}/{flowContextId}/deletable",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseDeletableResource> isDeletable1(
+    ResponseEntity<DataResponseDeletableResource> isDeletable1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowContextId", description = "Flow context id", required = true, in = ParameterIn.PATH) @PathVariable("flowContextId") UUID flowContextId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, any version will match.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"deletable\" : true }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2122,24 +1599,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/ssh/known-hosts",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseHostKey> listKnownHosts(
+    ResponseEntity<ListResponseHostKey> listKnownHosts(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"host\" : \"host\", \"type\" : \"type\", \"key\" : \"key\" }, { \"host\" : \"host\", \"type\" : \"type\", \"key\" : \"key\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2163,24 +1628,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-models/{domain}/published",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseTenantFlowmodel> listPublished(
+    ResponseEntity<ListResponseTenantFlowmodel> listPublished(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"sdpermissions\" : [ \"sdpermissions\", \"sdpermissions\" ], \"nodes\" : [ { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] }, { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] } ], \"lockedBy\" : \"lockedBy\", \"latestVersion\" : true, \"stateComment\" : \"stateComment\", \"name\" : \"name\", \"description\" : \"description\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"state\" : \"DRAFT\", \"type\" : \"COMMUNICATION\", \"version\" : 6, \"revision\" : 0 }, { \"sdpermissions\" : [ \"sdpermissions\", \"sdpermissions\" ], \"nodes\" : [ { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] }, { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] } ], \"lockedBy\" : \"lockedBy\", \"latestVersion\" : true, \"stateComment\" : \"stateComment\", \"name\" : \"name\", \"description\" : \"description\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"state\" : \"DRAFT\", \"type\" : \"COMMUNICATION\", \"version\" : 6, \"revision\" : 0 } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2204,24 +1657,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/flow-model-contexts/{domain}/published",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<ListResponseFlowModelContextSnapshot> listPublished1(
+    ResponseEntity<ListResponseFlowModelContextSnapshot> listPublished1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : [ { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" }, { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2243,24 +1684,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/cron-jobs/{domain}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseCronJob> listSchedules(
+    ResponseEntity<ListResponseCronJob> listSchedules(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"dryRun\" : true, \"jobAvailable\" : true, \"endDateStart\" : \"endDateStart\", \"startDateEnd\" : \"startDateEnd\", \"enabled\" : true, \"mode\" : \"BATCH\", \"cronType\" : \"markDeleted\", \"sortingAssetStatuses\" : [ \"processed\", \"processed\" ], \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"appConsolidation\" : true, \"headers\" : { \"key\" : \"headers\" }, \"endDateEnd\" : \"endDateEnd\", \"serviceName\" : \"serviceName\", \"domainId\" : \"domainId\", \"communicationIdList\" : [ \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" ], \"cronExpression\" : \"cronExpression\", \"startDateStart\" : \"startDateStart\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"cacheTimeout\" : 0.8008282, \"inputPath\" : \"inputPath\", \"preSortQueueName\" : \"preSortQueueName\", \"name\" : \"name\", \"statuses\" : [ \"canceled\", \"canceled\" ], \"channelName\" : \"channelName\", \"postSortQueueName\" : \"postSortQueueName\" }, { \"dryRun\" : true, \"jobAvailable\" : true, \"endDateStart\" : \"endDateStart\", \"startDateEnd\" : \"startDateEnd\", \"enabled\" : true, \"mode\" : \"BATCH\", \"cronType\" : \"markDeleted\", \"sortingAssetStatuses\" : [ \"processed\", \"processed\" ], \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"appConsolidation\" : true, \"headers\" : { \"key\" : \"headers\" }, \"endDateEnd\" : \"endDateEnd\", \"serviceName\" : \"serviceName\", \"domainId\" : \"domainId\", \"communicationIdList\" : [ \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" ], \"cronExpression\" : \"cronExpression\", \"startDateStart\" : \"startDateStart\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"cacheTimeout\" : 0.8008282, \"inputPath\" : \"inputPath\", \"preSortQueueName\" : \"preSortQueueName\", \"name\" : \"name\", \"statuses\" : [ \"canceled\", \"canceled\" ], \"channelName\" : \"channelName\", \"postSortQueueName\" : \"postSortQueueName\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2285,25 +1714,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/sortdata/{domain}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> listSortingAssets(
+    ResponseEntity<GenericResponse> listSortingAssets(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @NotNull @Parameter(name = "filterRequest", description = "Use the optional filter parameter to decide which sorting assets should be listed (ALL of them if no filter specified)", required = true, in = ParameterIn.QUERY) @Valid SortingDataFilterRequest filterRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2324,15 +1741,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/secrets/{domain}/migrateVault",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Boolean> migrateVault(
+    ResponseEntity<Boolean> migrateVault(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2366,26 +1780,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-models/{domain}/{flowModelId}/publish",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseTenantFlowmodel> publish(
+    ResponseEntity<DataResponseTenantFlowmodel> publish(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelId", description = "Flow model id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelId") UUID flowModelId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, latest version will be published.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"sdpermissions\" : [ \"sdpermissions\", \"sdpermissions\" ], \"nodes\" : [ { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] }, { \"internal\" : true, \"metadata\" : [ { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" }, { \"name\" : \"name\", \"text\" : \"text\", \"type\" : \"type\" } ], \"instanceId\" : \"instanceId\", \"subtype\" : \"directory_channel\", \"displayName\" : \"displayName\", \"x\" : 1, \"y\" : 5, \"attributes\" : [ { \"name\" : \"name\", \"value\" : \"value\" }, { \"name\" : \"name\", \"value\" : \"value\" } ], \"id\" : \"id\", \"type\" : \"input\", \"connections\" : [ { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" }, { \"condition\" : { \"datatype\" : \"string\", \"values\" : [ \"values\", \"values\" ], \"name\" : \"name\", \"type\" : \"outcome\", \"value\" : \"value\", \"operator\" : \"EQ\" }, \"sourceAnchor\" : \"sourceAnchor\", \"targetAnchor\" : \"targetAnchor\", \"displayName\" : \"displayName\", \"defaultConnection\" : true, \"targetNodeId\" : \"targetNodeId\", \"targetNode\" : \"targetNode\" } ] } ], \"lockedBy\" : \"lockedBy\", \"latestVersion\" : true, \"stateComment\" : \"stateComment\", \"name\" : \"name\", \"description\" : \"description\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"state\" : \"DRAFT\", \"type\" : \"COMMUNICATION\", \"version\" : 6, \"revision\" : 0 }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2419,26 +1821,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-model-contexts/{domain}/{flowModelContextId}/publish",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseFlowModelContextSnapshot> publish1(
+    ResponseEntity<DataResponseFlowModelContextSnapshot> publish1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelContextId", description = "Flow context id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelContextId") UUID flowModelContextId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, latest version will be published.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"snapshotId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"name\" : \"name\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"xmlContent\" : \"xmlContent\", \"version\" : 0, \"domainId\" : \"domainId\", \"content\" : \"content\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2461,25 +1851,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/cron-jobs/{domain}/{cronJobId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseCronJob> readSchedule(
+    ResponseEntity<DataResponseCronJob> readSchedule(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "cronJobId", description = "CronJobId", required = true, in = ParameterIn.PATH) @PathVariable("cronJobId") UUID cronJobId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"dryRun\" : true, \"jobAvailable\" : true, \"endDateStart\" : \"endDateStart\", \"startDateEnd\" : \"startDateEnd\", \"enabled\" : true, \"mode\" : \"BATCH\", \"cronType\" : \"markDeleted\", \"sortingAssetStatuses\" : [ \"processed\", \"processed\" ], \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"appConsolidation\" : true, \"headers\" : { \"key\" : \"headers\" }, \"endDateEnd\" : \"endDateEnd\", \"serviceName\" : \"serviceName\", \"domainId\" : \"domainId\", \"communicationIdList\" : [ \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" ], \"cronExpression\" : \"cronExpression\", \"startDateStart\" : \"startDateStart\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"cacheTimeout\" : 0.8008282, \"inputPath\" : \"inputPath\", \"preSortQueueName\" : \"preSortQueueName\", \"name\" : \"name\", \"statuses\" : [ \"canceled\", \"canceled\" ], \"channelName\" : \"channelName\", \"postSortQueueName\" : \"postSortQueueName\" }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2504,16 +1882,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}/release",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> releaseHoldingFlowInstances(
+    ResponseEntity<String> releaseHoldingFlowInstances(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Flow instance id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2538,16 +1913,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/release",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> releaseHoldingFlowStep(
+    ResponseEntity<String> releaseHoldingFlowStep(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Flow step id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2574,18 +1946,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/jobs/{id}/reprocessing",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> reprocessJob(
+    ResponseEntity<String> reprocessJob(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Job id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "useCurrentFlowModel", description = "Use current flow model (instead of the one stored in the job)", in = ParameterIn.QUERY) @Valid @RequestParam(value = "useCurrentFlowModel", required = false, defaultValue = "false") Boolean useCurrentFlowModel,
         @Parameter(name = "useCurrentFlowContext", description = "Use current flow context (instead of the one stored in the job", in = ParameterIn.QUERY) @Valid @RequestParam(value = "useCurrentFlowContext", required = false, defaultValue = "false") Boolean useCurrentFlowContext
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2606,15 +1975,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/secrets/{domain}/rollover",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Integer> rolloverKeys(
+    ResponseEntity<Integer> rolloverKeys(
         @NotNull @Parameter(name = "oldKeyId", description = "", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "oldKeyId", required = true) String oldKeyId
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2636,25 +2002,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/secrets/{domain}/{secretId}/exists",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<DataResponseBoolean> secretExists(
+    ResponseEntity<DataResponseBoolean> secretExists(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "secretId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("secretId") UUID secretId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : true, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2677,18 +2031,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/secrets/{domain}/{secretId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<String> setSecret(
+    ResponseEntity<String> setSecret(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "secretId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("secretId") UUID secretId,
         @Parameter(name = "SecretInfo", description = "", required = true) @Valid @RequestBody SecretInfo secretInfo
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2721,26 +2072,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/jobs/post-sort",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> startPostSortJob(
+    ResponseEntity<GenericResponse> startPostSortJob(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "PostSortRunOption", description = "   | Run setting            | description                                                                                           | |------------------------|-------------------------------------------------------------------------------------------------------| | flowModelId            | Select sorting assets matching flow model id.                                                         | | appConsolidation       | Consolidate multiple communications.                                                                  | | dryRun                 | Dry run                                                                                               | | externalId             | Set externalID on the job for this post-sort run.                                                     | | customerList           | Select individual list of customer numbers or ranges of numbers to be processed in post-sort run.     | | postSortQueueName      | Set post-sort queue to use in this post-sort run. If not specified, all post-sort queues will be included in the run.|   | Sort asset filter name |Filter value description                                                                               | |------------------------|-------------------------------------------------------------------------------------------------------| | ids                    | Filter sorting assets matching sorting index ids.                                                     | | jobIds                 | Filter sorting assets matching job ids.                                                               | | flowStepIds            | Filter sorting assets matching flow step ids.                                                         | | communicationIds       | Filter sorting assets matching communication ids.                                                     | | queueNames             | Filter sorting assets matching pre-sort queue name                                                     (Note: Only first entry of list is currently supported for post-sort run).       | | externalIds            | Filter sorting assets matching external ids.                                                          | | creationDateStart      | Filter sorting assets created after this date (yyyy-MM-dd format or elapsed period in negative days). | | creationDateEnd        | Filter sorting assets created before this date (yyyy-MM-dd format or elapsed period in negative days).|", required = true) @Valid @RequestBody PostSortRunOption postSortRunOption
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2765,16 +2104,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-instances/{id}/stop",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> stopFlowInstance(
+    ResponseEntity<String> stopFlowInstance(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Flow instance id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2799,16 +2135,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/flow-steps/{id}/stop",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> stopFlowStep(
+    ResponseEntity<String> stopFlowStep(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Flow step id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2833,16 +2166,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/{domain}/jobs/{id}/stop",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> stopJob(
+    ResponseEntity<String> stopJob(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Job id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2865,16 +2195,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/cron-jobs/{domain}/{cronJobId}/trigger",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> triggerSchedule(
+    ResponseEntity<String> triggerSchedule(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "cronJobId", description = "CronJobId", required = true, in = ParameterIn.PATH) @PathVariable("cronJobId") UUID cronJobId
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2908,26 +2235,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-models/{domain}/{flowModelId}/unpublish",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<GenericResponse> unpublish(
+    ResponseEntity<GenericResponse> unpublish(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelId", description = "Flow model id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelId") UUID flowModelId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, latest version will be unpublished.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2956,26 +2271,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-models/{domain}/unpublish",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> unpublish1(
+    ResponseEntity<GenericResponse> unpublish1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "FlowObjectsRequest", description = "", required = true) @Valid @RequestBody FlowObjectsRequest flowObjectsRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3009,26 +2312,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-model-contexts/{domain}/{flowModelContextId}/unpublish",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> unpublish2(
+    ResponseEntity<GenericResponse> unpublish2(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "flowModelContextId", description = "Flow context id", required = true, in = ParameterIn.PATH) @PathVariable("flowModelContextId") UUID flowModelContextId,
         @Parameter(name = "version", description = "Specify version (optional). If omitted, latest version will be unpublished.", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false) Integer version
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3057,26 +2348,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/flow-model-contexts/{domain}/unpublish",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> unpublish3(
+    ResponseEntity<GenericResponse> unpublish3(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "FlowObjectsRequest", description = "", required = true) @Valid @RequestBody FlowObjectsRequest flowObjectsRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3099,15 +2378,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/runtime/cache/update",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> updateCache(
+    ResponseEntity<String> updateCache(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3129,26 +2405,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/configuration/{domainId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseConfiguration> updateConfiguration(
+    ResponseEntity<DataResponseConfiguration> updateConfiguration(
         @Size(min = 1, max = 255) @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "ModelConfiguration", description = "", required = true) @Valid @RequestBody ModelConfiguration modelConfiguration
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"configName\" : \"configName\", \"configDetails\" : { \"key\" : { \"values\" : [ { }, { } ], \"secretId\" : \"secretId\", \"value\" : \"value\" } }, \"active\" : true, \"configType\" : \"configType\", \"domainId\" : \"domainId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3172,27 +2436,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/cron-jobs/{domain}/{cronJobId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseCronJob> updateSchedule(
+    ResponseEntity<DataResponseCronJob> updateSchedule(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "cronJobId", description = "CronJobId", required = true, in = ParameterIn.PATH) @PathVariable("cronJobId") UUID cronJobId,
         @Parameter(name = "CronJob", description = "Cron job. It can apply to jobs or sort assets.<br/>name: Name of the cron job<br/>cronExpression: Cron expression in UNIX format that reflects when the cron job should be executed (the main cron orchestration cleanup job is executed hourly by default)<br/>cronType: Cron job type. Available values: markDeleted,wipe,startJob,updateExpirationTime,wipeSortingAssets,expireSortingAssets,sortingAndBundling. When wipe is selected the filter parameters are not used.<br/>startDateStart: Filter jobs matching started date after this date or sort assets created after this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today.<br/>startDateEnd: Filter jobs matching started date before this date or sort assets created before this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today.<br/>endDateStart: Filter jobs matching ended date after this date or sort assets modified after this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today<br/>endDateEnd: Filter jobs matching ended date before this date or sort assets modified before this date. Date is a (yyyy-MM-dd format) String. It's also possible to use a negative number, representing the number of days before today<br/>statuses: Match jobs with any of these statuses. Possible values for jobs: complete,error,canceled,deleted<br/>sortingAssetStatuses: Match sorting assets with any of these statuses, possible values for sort assets: processed,waiting,expired,canceled<br/>serviceName: service to trigger for job<br/>channelName: input channel for pulling data<br/>inputPath: path parameter for the input channel<br/>headers: map of headers for starting job<br/>cacheTimeout: optional duration of file cache<br/>mode: Filter jobs matching this mode (ONDEMAND|BATCH)<br/>flowModelId: Filter sorting assets matching flow model id<br/>communicationIdList: Filter sorting assets matching the communication id (only one) or when running sorting&bundling with appConsolidation equal to true, use the specified communications,<br/>when appConsolidation is false, only one communication id should be present<br/>preSortQueueName: Filter sorting assets matching pre sort queue name<br/>jobId: Filter sorting assets matching jobId<br/>postSortQueueName: queue name used in the post sort queue name<br/>appConsolidation: says whether multiple communications should be consolidated when running sorting&bundling<br/>enabled: Determines whether the cron job should be triggered or not. Default value: true", required = true) @Valid @RequestBody CronJob cronJob
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"dryRun\" : true, \"jobAvailable\" : true, \"endDateStart\" : \"endDateStart\", \"startDateEnd\" : \"startDateEnd\", \"enabled\" : true, \"mode\" : \"BATCH\", \"cronType\" : \"markDeleted\", \"sortingAssetStatuses\" : [ \"processed\", \"processed\" ], \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"appConsolidation\" : true, \"headers\" : { \"key\" : \"headers\" }, \"endDateEnd\" : \"endDateEnd\", \"serviceName\" : \"serviceName\", \"domainId\" : \"domainId\", \"communicationIdList\" : [ \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\" ], \"cronExpression\" : \"cronExpression\", \"startDateStart\" : \"startDateStart\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"cacheTimeout\" : 0.8008282, \"inputPath\" : \"inputPath\", \"preSortQueueName\" : \"preSortQueueName\", \"name\" : \"name\", \"statuses\" : [ \"canceled\", \"canceled\" ], \"channelName\" : \"channelName\", \"postSortQueueName\" : \"postSortQueueName\" }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3217,26 +2469,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/sortdata/{domain}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<GenericResponse> updateState(
+    ResponseEntity<GenericResponse> updateState(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "UpdateStateRequest", description = "") @Valid @RequestBody(required = false) UpdateStateRequest updateStateRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3262,27 +2502,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/sortdata/{domain}/{id}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseSortingAsset> updateState1(
+    ResponseEntity<DataResponseSortingAsset> updateState1(
         @Size(min = 1, max = 255) @Parameter(name = "domain", description = "Domain id", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "Id", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "UpdateState1Request", description = "") @Valid @RequestBody(required = false) UpdateState1Request updateState1Request
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : { \"metadata\" : \"metadata\", \"communicationId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"sortSubflow\" : \"sortSubflow\", \"externalId\" : \"externalId\", \"subpackageIds\" : \"subpackageIds\", \"flowStepId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"creationDate\" : \"2000-01-23T04:56:07.000+00:00\", \"referenceId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"jobId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"lastModificationDate\" : \"2000-01-23T04:56:07.000+00:00\", \"queueName\" : \"queueName\", \"customersCount\" : 0, \"subPackageIds\" : \"subPackageIds\", \"id\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"flowModelId\" : \"046b6c7f-0b8a-43b9-b35d-6489e6daee91\", \"state\" : \"processed\", \"engineInfo\" : \"engineInfo\" }, \"details\" : \"details\", \"message\" : \"message\", \"status\" : \"success|failure\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3303,25 +2531,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/updateTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenant(
+    ResponseEntity<DataResponseTenant> updateTenant(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3342,24 +2558,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/{tenantId}/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenantSchema(
+    ResponseEntity<DataResponseTenant> updateTenantSchema(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -3379,23 +2583,11 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/all/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> updateTenantSchemas(
+    ResponseEntity<ListResponseTenant> updateTenantSchemas(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 }

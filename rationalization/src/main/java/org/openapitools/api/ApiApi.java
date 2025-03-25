@@ -50,14 +50,10 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-18T18:04:36.667726893Z[Europe/Lisbon]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-03-25T22:40:32.411824350Z[Europe/Lisbon]")
 @Validated
 @Tag(name = "migration-set-controller", description = "the migration-set-controller API")
 public interface ApiApi {
-
-    default Optional<NativeWebRequest> getRequest() {
-        return Optional.empty();
-    }
 
     /**
      * PATCH /api/v1/migrationset/{domainId}/{msId}
@@ -79,18 +75,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PATCH,
         value = "/api/v1/migrationset/{domainId}/{msId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<String> applyPatchForMigrationSet(
+    ResponseEntity<String> applyPatchForMigrationSet(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "MigrationSetPatchRequest", description = "", required = true) @Valid @RequestBody MigrationSetPatchRequest migrationSetPatchRequest
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -113,27 +106,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{id}/domains/{domainId}/associate",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> associateMigrationSetToDomain(
+    ResponseEntity<RationalizationResponseObject> associateMigrationSetToDomain(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "MigrationSetDomainRequest", description = "", required = true) @Valid @RequestBody MigrationSetDomainRequest migrationSetDomainRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -156,26 +137,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/rationalization/{domainId}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> cancelOfflineJob(
+    ResponseEntity<RationalizationResponseObject> cancelOfflineJob(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -198,26 +167,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/rationalization/{domainId}/{msId}/{implicit}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> cancelOfflineJob1(
+    ResponseEntity<RationalizationResponseObject> cancelOfflineJob1(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -240,27 +197,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/rationalization/{domainId}/preview/{msId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> createCustomFragment(
+    ResponseEntity<RationalizationResponseObject> createCustomFragment(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "CustomFragmentRequest", description = "", required = true) @Valid @RequestBody CustomFragmentRequest customFragmentRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -282,26 +227,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/migrationset/{domain}/links",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> createLinkBtwRatAndDasMigrationSet(
+    ResponseEntity<RationalizationResponseObject> createLinkBtwRatAndDasMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "MigrationSetLinkRequest", description = "", required = true) @Valid @RequestBody MigrationSetLinkRequest migrationSetLinkRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -323,26 +256,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/migrationset/{domain}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> createMigrationSet(
+    ResponseEntity<RationalizationResponseObject> createMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "MigrationSetRequest", description = "", required = true) @Valid @RequestBody MigrationSetRequest migrationSetRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -365,27 +286,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/migrationset/{domain}/tmpfile",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> createRationalizationActivity(
+    ResponseEntity<RationalizationResponseObject> createRationalizationActivity(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "migrationType", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "migrationType", required = false, defaultValue = "CONTENT") String migrationType,
         @Parameter(name = "UpdateRationalizationActivityRequest", description = "") @Valid @RequestBody(required = false) UpdateRationalizationActivityRequest updateRationalizationActivityRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -406,24 +315,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantSchema(
+    ResponseEntity<DataResponseTenant> createTenantSchema(
         @Size(min = 1, max = 40) @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -444,25 +341,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/tenants/addTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
+    ResponseEntity<DataResponseTenant> createTenantWithExistingSchema(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -485,26 +370,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.DELETE,
         value = "/api/v1/migrationset/{domainId}/{msId}/{updateOnly}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> deleteMigrationSet(
+    ResponseEntity<RationalizationResponseObject> deleteMigrationSet(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "updateOnly", description = "", required = true, in = ParameterIn.PATH) @PathVariable("updateOnly") Boolean updateOnly
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -527,27 +400,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{id}/domains/{domainId}/disassociate",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> disassociateMigrationSetToDomain(
+    ResponseEntity<RationalizationResponseObject> disassociateMigrationSetToDomain(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "MigrationSetDomainRequest", description = "", required = true) @Valid @RequestBody MigrationSetDomainRequest migrationSetDomainRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -570,14 +431,11 @@ public interface ApiApi {
         value = "/api/v1/export/{domain}/{id}"
     )
     
-    default ResponseEntity<Void> exportMigrationSet(
+    ResponseEntity<Void> exportMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "version", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "version", required = false, defaultValue = "LATEST_APPROVED") String version
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -598,17 +456,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/export/{domain}/{id}",
-        consumes = { "application/json" }
+        consumes = "application/json"
     )
     
-    default ResponseEntity<Void> exportResourcesFromRootInDomain(
+    ResponseEntity<Void> exportResourcesFromRootInDomain(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "MigrationSetExportRequest", description = "", required = true) @Valid @RequestBody MigrationSetExportRequest migrationSetExportRequest
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -631,26 +486,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/rationalization/{domainId}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> generateReportOffline(
+    ResponseEntity<RationalizationResponseObject> generateReportOffline(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -673,26 +516,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/rationalization/{domainId}/{msId}/{implicit}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> generateReportOffline1(
+    ResponseEntity<RationalizationResponseObject> generateReportOffline1(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -712,15 +543,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version/api",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<String> getApiVersion(
+    ResponseEntity<String> getApiVersion(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -742,25 +570,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/{id}/deletion-eligibility",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getCanDeleteMigrationSet(
+    ResponseEntity<RationalizationResponseObject> getCanDeleteMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -780,24 +596,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/permissions/configurations",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getConfiguration(
+    ResponseEntity<RationalizationResponseObject> getConfiguration(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -820,26 +624,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/fragments/superset/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getCustomSuperSet(
+    ResponseEntity<RationalizationResponseObject> getCustomSuperSet(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId,
         @NotNull @Parameter(name = "request", description = "", required = true, in = ParameterIn.QUERY) @Valid CustomSuperSetRequest request
-    ) {
-        getRequest().ifPresent(request1 -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request1.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request1, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -861,25 +653,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/fragments/details/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentDetails(
+    ResponseEntity<RationalizationResponseObject> getFragmentDetails(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -901,25 +681,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/fragments/order/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentOrder(
+    ResponseEntity<RationalizationResponseObject> getFragmentOrder(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -942,26 +710,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/fragments/refernce/{msId}/{varId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentReference(
+    ResponseEntity<RationalizationResponseObject> getFragmentReference(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "varId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("varId") UUID varId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -989,10 +745,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/fragments/{domain}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentsOfMigrationSet(
+    ResponseEntity<RationalizationResponseObject> getFragmentsOfMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Min(0) @Parameter(name = "offset", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
@@ -1001,19 +757,7 @@ public interface ApiApi {
         @Parameter(name = "filter", description = "", in = ParameterIn.QUERY) @Valid RationalisationFilter filter,
         @Parameter(name = "hidden", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "hidden", required = false, defaultValue = "false") Boolean hidden,
         @Parameter(name = "references", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "references", required = false, defaultValue = "false") Boolean references
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1041,10 +785,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/template/fragments/{domain}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentsOfTemplateMigrationSet(
+    ResponseEntity<RationalizationResponseObject> getFragmentsOfTemplateMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Min(0) @Parameter(name = "offset", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
@@ -1053,19 +797,7 @@ public interface ApiApi {
         @Parameter(name = "filter", description = "", in = ParameterIn.QUERY) @Valid RationalisationFilter filter,
         @Parameter(name = "hidden", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "hidden", required = false, defaultValue = "false") Boolean hidden,
         @Parameter(name = "references", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "references", required = false, defaultValue = "false") Boolean references
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1087,25 +819,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/fragment/references/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getFragmentsReferences(
+    ResponseEntity<RationalizationResponseObject> getFragmentsReferences(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1127,25 +847,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/fragments/groups/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getGroupFragment(
+    ResponseEntity<RationalizationResponseObject> getGroupFragment(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1165,15 +873,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/permissions/licenses",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> getLicensePermissions(
+    ResponseEntity<String> getLicensePermissions(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1194,15 +899,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/permissions/licenses/{production}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> getLicensePermissions1(
+    ResponseEntity<String> getLicensePermissions1(
         @Parameter(name = "production", description = "", required = true, in = ParameterIn.PATH) @PathVariable("production") Boolean production
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1224,25 +926,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/report/{domain}/{id}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getMigrationReportDetails(
+    ResponseEntity<RationalizationResponseObject> getMigrationReportDetails(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1265,26 +955,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<SseEmitter> getMigrationSet(
+    ResponseEntity<SseEmitter> getMigrationSet(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"timeout\" : 0 }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1307,26 +985,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/{msId}/{implicit}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<SseEmitter> getMigrationSet1(
+    ResponseEntity<SseEmitter> getMigrationSet1(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"timeout\" : 0 }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1348,25 +1014,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domainId}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getMigrationSet2(
+    ResponseEntity<RationalizationResponseObject> getMigrationSet2(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1388,25 +1042,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domainId}/{id}/domains",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getMigrationSet3(
+    ResponseEntity<RationalizationResponseObject> getMigrationSet3(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1428,25 +1070,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/links/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getMigrationSetLinks(
+    ResponseEntity<RationalizationResponseObject> getMigrationSetLinks(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1474,10 +1104,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getMigrationSets(
+    ResponseEntity<RationalizationResponseObject> getMigrationSets(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Min(0) @Parameter(name = "offset", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "offset", required = false, defaultValue = "0") Integer offset,
         @Min(10) @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false, defaultValue = "2147483647") Integer limit,
@@ -1486,19 +1116,7 @@ public interface ApiApi {
         @Parameter(name = "hidden", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "hidden", required = false, defaultValue = "false") Boolean hidden,
         @Parameter(name = "latestversion", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "latestversion", required = false, defaultValue = "false") Boolean latestversion,
         @Parameter(name = "checkIfApproved", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "checkIfApproved", required = false, defaultValue = "false") Boolean checkIfApproved
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1520,25 +1138,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/custom/fragments/{customFragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getOrginatedFragments(
+    ResponseEntity<RationalizationResponseObject> getOrginatedFragments(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "customFragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("customFragmentId") UUID customFragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1563,28 +1169,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/fragments/pdf/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getPdfFragments(
+    ResponseEntity<RationalizationResponseObject> getPdfFragments(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @NotNull @Parameter(name = "pdfid", description = "", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "pdfid", required = true) UUID pdfid,
         @Min(0) @Parameter(name = "pageno", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageno", required = false, defaultValue = "0") Integer pageno,
         @Min(0) @Parameter(name = "pagecount", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pagecount", required = false, defaultValue = "0") Integer pagecount
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1607,26 +1201,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/migrationset/{dasId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getRatMigrationSetDetails(
+    ResponseEntity<RationalizationResponseObject> getRatMigrationSetDetails(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "dasId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("dasId") UUID dasId,
         @Parameter(name = "latestApproved", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "latestApproved", required = false, defaultValue = "false") Boolean latestApproved
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1648,25 +1230,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/report/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getRationalisationRunResults(
+    ResponseEntity<RationalizationResponseObject> getRationalisationRunResults(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1695,10 +1265,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/fragments/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getRationalizationFragments(
+    ResponseEntity<RationalizationResponseObject> getRationalizationFragments(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "commType", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "commType", required = false) String commType,
@@ -1708,19 +1278,7 @@ public interface ApiApi {
         @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
         @Parameter(name = "orderby", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "", required = false) Object orderby,
         @Parameter(name = "filter", description = "", in = ParameterIn.QUERY) @Valid RationalisationFilter filter
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1742,25 +1300,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/{msid}/history",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getResourceHistory(
+    ResponseEntity<RationalizationResponseObject> getResourceHistory(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msid", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msid") UUID msid
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1782,25 +1328,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/custom/fragments/parent/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getRootCustomFragmentId(
+    ResponseEntity<RationalizationResponseObject> getRootCustomFragmentId(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1822,25 +1356,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/template/{domain}/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getTemplateDetailsOfMigrationSet(
+    ResponseEntity<RationalizationResponseObject> getTemplateDetailsOfMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1869,10 +1391,10 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/template/fragments/{msId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getTemplateFragments(
+    ResponseEntity<RationalizationResponseObject> getTemplateFragments(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "commType", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "commType", required = false) String commType,
@@ -1882,19 +1404,7 @@ public interface ApiApi {
         @Parameter(name = "limit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit,
         @Parameter(name = "orderby", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "", required = false) Object orderby,
         @Parameter(name = "filter", description = "", in = ParameterIn.QUERY) @Valid RationalisationFilter filter
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1918,27 +1428,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/template/fragment/references/{fragmentId}/{templateId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getTemplateFragmentsReferences(
+    ResponseEntity<RationalizationResponseObject> getTemplateFragmentsReferences(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId,
         @Parameter(name = "templateId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("templateId") UUID templateId,
         @Parameter(name = "communications", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "communications", required = false) List<String> communications
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -1962,27 +1460,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/template/rule/references/{ruleId}/{templateId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getTemplateRuleFragmentsReferences(
+    ResponseEntity<RationalizationResponseObject> getTemplateRuleFragmentsReferences(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "ruleId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("ruleId") UUID ruleId,
         @Parameter(name = "templateId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("templateId") UUID templateId,
         @Parameter(name = "communications", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "communications", required = false) List<String> communications
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2006,27 +1492,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/migrationset/{domain}/template/variable/references/{variableId}/{templateId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<RationalizationResponseObject> getTemplateVariableFragmentsReferences(
+    ResponseEntity<RationalizationResponseObject> getTemplateVariableFragmentsReferences(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "variableId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("variableId") UUID variableId,
         @Parameter(name = "templateId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("templateId") UUID templateId,
         @Parameter(name = "communications", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "communications", required = false) List<String> communications
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2047,24 +1521,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> getTenant(
+    ResponseEntity<DataResponseTenant> getTenant(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2085,24 +1547,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenant/internal/{tenantId}",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> getTenant1(
+    ResponseEntity<DataResponseTenant> getTenant1(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2122,24 +1572,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants/configuration",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
+    ResponseEntity<DataResponseTenantsConfiguration> getTenantConfiguration(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"autoSchemaManagement\" : true }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2159,24 +1597,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/tenants",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> getTenants(
+    ResponseEntity<ListResponseTenant> getTenants(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2196,24 +1622,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/version",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<VersionConfig> getVersion(
+    ResponseEntity<VersionConfig> getVersion(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"patch\" : \"patch\", \"major\" : \"major\", \"minor\" : \"minor\", \"versionString\" : \"versionString\", \"apiIdentifier\" : \"apiIdentifier\", \"details\" : { \"git\" : { \"commits\" : \"commits\", \"tag\" : \"tag\", \"branch\" : \"branch\", \"hash\" : \"hash\" }, \"appName\" : \"appName\", \"buildNumber\" : \"buildNumber\", \"timestamp\" : \"timestamp\" }, \"clientVersion\" : \"clientVersion\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2237,28 +1651,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/migrationset/import/{domain}",
-        produces = { "*/*" },
-        consumes = { "multipart/form-data", "application/json" }
+        produces = "*/*",
+        consumes = "multipart/form-data"
     )
     
-    default ResponseEntity<RationalizationResponseObject> importMigrationSet(
+    ResponseEntity<RationalizationResponseObject> importMigrationSet(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "commit", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "commit", required = false, defaultValue = "false") Boolean commit,
         @Parameter(name = "encrypt", description = "") @Valid @RequestParam(value = "encrypt", required = false) String encrypt,
         @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) MultipartFile document
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2279,15 +1681,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.POST,
         value = "/api/v1/secrets/migrateVault",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Boolean> migrateVault(
+    ResponseEntity<Boolean> migrateVault(
         
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2310,17 +1709,14 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/rationalization/{domainId}/preview/{fragmentId}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<Object> preview(
+    ResponseEntity<Object> preview(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId,
         @Parameter(name = "isFragmentPreview", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "isFragmentPreview", required = false, defaultValue = "false") Boolean isFragmentPreview
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2343,27 +1739,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{domain}/{id}/promote",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> promote(
+    ResponseEntity<RationalizationResponseObject> promote(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "WorkflowRequestBody", description = "", required = true) @Valid @RequestBody WorkflowRequestBody workflowRequestBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2388,19 +1772,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/api/v1/internal/jobs/{tenant}/{domain}/{msId}/{userName}/{implicit}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> runJob(
+    ResponseEntity<String> runJob(
         @Parameter(name = "tenant", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenant") String tenant,
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit,
         @Parameter(name = "userName", description = "", required = true, in = ParameterIn.PATH) @PathVariable("userName") String userName
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2424,18 +1805,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/internal/jobs/{tenant}/{domain}/{msId}/{implicit}",
-        produces = { "*/*" }
+        produces = "*/*"
     )
     
-    default ResponseEntity<String> unlockMigrationset(
+    ResponseEntity<String> unlockMigrationset(
         @Parameter(name = "tenant", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenant") String tenant,
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "implicit", description = "", required = true, in = ParameterIn.PATH) @PathVariable("implicit") Boolean implicit
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2459,28 +1837,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/rationalization/{domainId}/preview/{msId}/{customFragmentId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> updateCustomFragment(
+    ResponseEntity<RationalizationResponseObject> updateCustomFragment(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "customFragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("customFragmentId") UUID customFragmentId,
         @Parameter(name = "CustomFragmentRequest", description = "", required = true) @Valid @RequestBody CustomFragmentRequest customFragmentRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2503,18 +1869,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/rationalization/{domainId}/preview/{fragmentId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<Object> updateFragment(
+    ResponseEntity<Object> updateFragment(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "fragmentId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("fragmentId") UUID fragmentId,
         @Parameter(name = "FragmentRequest", description = "", required = true) @Valid @RequestBody FragmentRequest fragmentRequest
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2537,27 +1900,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{domainId}/{msId}",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> updateMigrationSet(
+    ResponseEntity<RationalizationResponseObject> updateMigrationSet(
         @Parameter(name = "domainId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domainId") String domainId,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "MigrationSetRequest", description = "", required = true) @Valid @RequestBody MigrationSetRequest migrationSetRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2581,28 +1932,16 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{domain}/{msId}/tmpfile",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> updateRationalizationActivity(
+    ResponseEntity<RationalizationResponseObject> updateRationalizationActivity(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "migrationType", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "migrationType", required = false, defaultValue = "CONTENT") String migrationType,
         @Parameter(name = "UpdateRationalizationActivityRequest", description = "") @Valid @RequestBody(required = false) UpdateRationalizationActivityRequest updateRationalizationActivityRequest
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2625,27 +1964,15 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/migrationset/{domain}/{msId}/state",
-        produces = { "*/*" },
-        consumes = { "application/json" }
+        produces = "*/*",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<RationalizationResponseObject> updateRationalizationState(
+    ResponseEntity<RationalizationResponseObject> updateRationalizationState(
         @Parameter(name = "domain", description = "", required = true, in = ParameterIn.PATH) @PathVariable("domain") String domain,
         @Parameter(name = "msId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("msId") UUID msId,
         @Parameter(name = "WorkflowRequestBody", description = "", required = true) @Valid @RequestBody WorkflowRequestBody workflowRequestBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("*/*"))) {
-                    String exampleString = "{ \"data\" : \"{}\", \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "*/*", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2666,25 +1993,13 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/updateTenant",
-        produces = { "application/json" },
-        consumes = { "application/json" }
+        produces = "application/json",
+        consumes = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenant(
+    ResponseEntity<DataResponseTenant> updateTenant(
         @Parameter(name = "CreateTenantBody", description = "", required = true) @Valid @RequestBody CreateTenantBody createTenantBody
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2705,24 +2020,12 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/{tenantId}/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<DataResponseTenant> updateTenantSchema(
+    ResponseEntity<DataResponseTenant> updateTenantSchema(
         @Parameter(name = "tenantId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("tenantId") String tenantId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 
     /**
@@ -2742,23 +2045,11 @@ public interface ApiApi {
     @RequestMapping(
         method = RequestMethod.PUT,
         value = "/api/v1/tenants/all/schema",
-        produces = { "application/json" }
+        produces = "application/json"
     )
     
-    default ResponseEntity<ListResponseTenant> updateTenantSchemas(
+    ResponseEntity<ListResponseTenant> updateTenantSchemas(
         
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" }, { \"schema\" : { \"schemaMissingFromDatabase\" : true, \"schemaId\" : \"schemaId\", \"latestSchemaChangeLogEntry\" : { \"liquiBaseVersion\" : \"liquiBaseVersion\", \"orderExecuted\" : 0, \"id\" : \"id\", \"dateExecuted\" : \"2000-01-23T04:56:07.000+00:00\" } }, \"tenantId\" : \"tenantId\" } ], \"status\" : \"status\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
+    );
 
 }
