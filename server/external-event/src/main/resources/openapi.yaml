@@ -1,0 +1,867 @@
+openapi: 3.0.1
+info:
+  description: '**For internal use of the product only**'
+  title: Exstream External Event Puller
+  version: v1
+servers:
+- description: service frontend url
+  url: https://vm-exstreamna1.eimdemo.com/eep
+tags:
+- name: setting-types-controller
+- name: settings-controller
+paths:
+  /api/v1/tenants/{tenantId}/schema:
+    put:
+      operationId: updateTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/tenants/updateTenant:
+    put:
+      operationId: updateTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/tenants/all/schema:
+    put:
+      operationId: updateTenantSchemas
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/settings:
+    delete:
+      description: Delete settings by setting id or domain id
+      operationId: deleteSettingsByIdOrDomainId_1
+      parameters:
+      - description: id of the setting to be deleted
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: domain for which settings must be deleted
+        explode: true
+        in: query
+        name: domainId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Internal Server Error
+      summary: "Delete settings by either setting id or domain id, atleast one of\
+        \ the values should be passed for delete call. If setting id value is passed,\
+        \ domain id value will be ignored and setting will be deleted based on setting\
+        \ id"
+      tags:
+      - settings-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: settings-controller
+    get:
+      description: Retrieve settings
+      operationId: retrieveSettings
+      parameters:
+      - description: domain for which settings must be retrieved
+        explode: true
+        in: query
+        name: domainId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: Internal Server Error
+      summary: Retrieve all settings for a tenant or a specific domain
+      tags:
+      - settings-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: settings-controller
+    put:
+      description: Save settings
+      operationId: saveSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetttingsList'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettings'
+          description: Internal Server Error
+      summary: Save a list of settings in domains
+      tags:
+      - settings-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: settings-controller
+  /api/v1/tenants/{tenantId}:
+    get:
+      operationId: getTenant
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+    post:
+      operationId: createTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          maxLength: 40
+          minLength: 1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/tenants/addTenant:
+    post:
+      operationId: createTenantWithExistingSchema
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/secrets/migrateVault:
+    post:
+      operationId: migrateVault
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: boolean
+          description: OK
+      summary: Migrate secrets to vault.
+      tags:
+      - secrets-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secrets-controller
+  /api/v1/version/api:
+    get:
+      operationId: getApiVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/version:
+    get:
+      operationId: getVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionConfig'
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/tenants:
+    get:
+      operationId: getTenants
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/tenants/configuration:
+    get:
+      operationId: getTenantConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenantsConfiguration'
+          description: OK
+      tags:
+      - tenant-admin-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: tenant-admin-controller
+  /api/v1/setting-types:
+    get:
+      description: Retrieve setting types
+      operationId: retrieveSettingTypes
+      parameters:
+      - description: Flag to decide if associated settings must be loaded. Allowed
+          values are true/false. Default value is false.
+        explode: true
+        in: query
+        name: loadSettings
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettingType'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettingType'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListResponseSettingType'
+          description: Internal Server Error
+      summary: Retrieve all setting types
+      tags:
+      - setting-types-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: setting-types-controller
+  /api/v1/setting-types/{typeId}:
+    get:
+      description: Retrieve a setting type
+      operationId: retrieveSettingType
+      parameters:
+      - description: "Setting type to retrieve. Allowed values are OTN, CORE_SIGNATURE."
+        explode: false
+        in: path
+        name: typeId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Flag to decide if associated settings must be loaded. Allowed
+          values are true/false. Default value is false.
+        explode: true
+        in: query
+        name: loadSettings
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseSettingType'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseSettingType'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DataResponseSettingType'
+          description: Internal Server Error
+      summary: Retrieve a specific setting type
+      tags:
+      - setting-types-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: setting-types-controller
+  /api/v1/settings/{id}:
+    delete:
+      description: Delete settings by setting id or domain id
+      operationId: deleteSettingsByIdOrDomainId
+      parameters:
+      - description: id of the setting to be deleted
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: domain for which settings must be deleted
+        explode: true
+        in: query
+        name: domainId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: OK
+        "403":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Forbidden
+        "500":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+          description: Internal Server Error
+      summary: "Delete settings by either setting id or domain id, atleast one of\
+        \ the values should be passed for delete call. If setting id value is passed,\
+        \ domain id value will be ignored and setting will be deleted based on setting\
+        \ id"
+      tags:
+      - settings-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: settings-controller
+components:
+  schemas:
+    DataResponseTenant:
+      example:
+        data:
+          schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/Tenant'
+      type: object
+    Schema:
+      example:
+        schemaMissingFromDatabase: true
+        schemaId: schemaId
+        latestSchemaChangeLogEntry:
+          liquiBaseVersion: liquiBaseVersion
+          orderExecuted: 0
+          id: id
+          dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        schemaId:
+          type: string
+        latestSchemaChangeLogEntry:
+          $ref: '#/components/schemas/SchemaChangeLogEntry'
+        schemaMissingFromDatabase:
+          type: boolean
+      type: object
+    SchemaChangeLogEntry:
+      example:
+        liquiBaseVersion: liquiBaseVersion
+        orderExecuted: 0
+        id: id
+        dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        dateExecuted:
+          format: date-time
+          type: string
+        orderExecuted:
+          format: int32
+          type: integer
+        liquiBaseVersion:
+          type: string
+      type: object
+    Tenant:
+      example:
+        schema:
+          schemaMissingFromDatabase: true
+          schemaId: schemaId
+          latestSchemaChangeLogEntry:
+            liquiBaseVersion: liquiBaseVersion
+            orderExecuted: 0
+            id: id
+            dateExecuted: 2000-01-23T04:56:07.000+00:00
+        tenantId: tenantId
+      properties:
+        tenantId:
+          type: string
+        schema:
+          $ref: '#/components/schemas/Schema'
+      type: object
+    CreateTenantBody:
+      example:
+        tenantId: tenantId
+        schemaName: schemaName
+        dbUserId: dbUserId
+        dbPassword: dbPassword
+      properties:
+        tenantId:
+          maxLength: 40
+          minLength: 1
+          type: string
+        schemaName:
+          type: string
+        dbUserId:
+          type: string
+        dbPassword:
+          type: string
+      required:
+      - dbPassword
+      type: object
+    ListResponseTenant:
+      example:
+        data:
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Tenant'
+          type: array
+      type: object
+    Settings:
+      example:
+        modifiedTime: 2000-01-23T04:56:07.000+00:00
+        settingDetails:
+          key: settingDetails
+        modifiedBy: modifiedBy
+        id: 0
+        type: UNKNOWN
+        domainId: domainId
+      properties:
+        id:
+          format: int32
+          type: integer
+        domainId:
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - ALL
+          - OTN
+          - CORE_SIGNATURE
+          type: string
+        settingDetails:
+          additionalProperties:
+            type: string
+          type: object
+        modifiedBy:
+          type: string
+        modifiedTime:
+          format: date-time
+          type: string
+      type: object
+    SetttingsList:
+      example:
+        data:
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Settings'
+          type: array
+      type: object
+    ListResponseSettings:
+      example:
+        data:
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Settings'
+          type: array
+      type: object
+    Details:
+      example:
+        git:
+          commits: commits
+          tag: tag
+          branch: branch
+          hash: hash
+        appName: appName
+        buildNumber: buildNumber
+        timestamp: timestamp
+      properties:
+        git:
+          $ref: '#/components/schemas/GitConfig'
+        appName:
+          type: string
+        buildNumber:
+          type: string
+        timestamp:
+          type: string
+      type: object
+    GitConfig:
+      example:
+        commits: commits
+        tag: tag
+        branch: branch
+        hash: hash
+      properties:
+        tag:
+          type: string
+        hash:
+          type: string
+        branch:
+          type: string
+        commits:
+          type: string
+      type: object
+    VersionConfig:
+      example:
+        patch: patch
+        major: major
+        minor: minor
+        versionString: versionString
+        apiIdentifier: apiIdentifier
+        details:
+          git:
+            commits: commits
+            tag: tag
+            branch: branch
+            hash: hash
+          appName: appName
+          buildNumber: buildNumber
+          timestamp: timestamp
+        clientVersion: clientVersion
+      properties:
+        apiIdentifier:
+          type: string
+        clientVersion:
+          type: string
+        details:
+          $ref: '#/components/schemas/Details'
+        major:
+          type: string
+        minor:
+          type: string
+        patch:
+          type: string
+        versionString:
+          type: string
+      type: object
+    DataResponseTenantsConfiguration:
+      example:
+        data:
+          autoSchemaManagement: true
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/TenantsConfiguration'
+      type: object
+    TenantsConfiguration:
+      example:
+        autoSchemaManagement: true
+      properties:
+        autoSchemaManagement:
+          type: boolean
+      type: object
+    ListResponseSettingType:
+      example:
+        data:
+        - settings:
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          type: type
+        - settings:
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          type: type
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/SettingType'
+          type: array
+      type: object
+    SettingType:
+      example:
+        settings:
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+        - modifiedTime: 2000-01-23T04:56:07.000+00:00
+          settingDetails:
+            key: settingDetails
+          modifiedBy: modifiedBy
+          id: 0
+          type: UNKNOWN
+          domainId: domainId
+        type: type
+      properties:
+        settings:
+          items:
+            $ref: '#/components/schemas/Settings'
+          type: array
+        type:
+          type: string
+      type: object
+    DataResponseSettingType:
+      example:
+        data:
+          settings:
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          - modifiedTime: 2000-01-23T04:56:07.000+00:00
+            settingDetails:
+              key: settingDetails
+            modifiedBy: modifiedBy
+            id: 0
+            type: UNKNOWN
+            domainId: domainId
+          type: type
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/SettingType'
+      type: object
+    GenericResponse:
+      example:
+        status: status
+      properties:
+        status:
+          type: string
+      type: object

@@ -1,0 +1,3105 @@
+openapi: 3.0.1
+info:
+  description: '**For internal use of the product only**'
+  title: Exstream Rationalization
+  version: v1
+servers:
+- description: service frontend url
+  url: https://vm-exstreamna1.eimdemo.com/rationalizationApi
+tags:
+- name: /api/v1/tenant/internal
+- name: Tenant Admin Controller
+paths:
+  /api/v1/tenants/{tenantId}/schema:
+    put:
+      operationId: updateTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/tenants/updateTenant:
+    put:
+      operationId: updateTenant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/tenants/all/schema:
+    put:
+      operationId: updateTenantSchemas
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/rationalization/{domainId}/preview/{msId}/{customFragmentId}:
+    put:
+      operationId: updateCustomFragment
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: customFragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFragmentRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/preview/{fragmentId}:
+    get:
+      operationId: preview
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: isFragmentPreview
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+    put:
+      operationId: updateFragment
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FragmentRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/migrationset/{id}/domains/{domainId}/disassociate:
+    put:
+      operationId: disassociateMigrationSetToDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetDomainRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-domains-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-domains-controller
+  /api/v1/migrationset/{id}/domains/{domainId}/associate:
+    put:
+      operationId: associateMigrationSetToDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetDomainRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-domains-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-domains-controller
+  /api/v1/migrationset/{domain}/{msId}/tmpfile:
+    put:
+      operationId: updateRationalizationActivity
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: migrationType
+        required: false
+        schema:
+          default: CONTENT
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateRationalizationActivity_request'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/{msId}/state:
+    put:
+      operationId: updateRationalizationState
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequestBody'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/{id}/promote:
+    put:
+      operationId: promote
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowRequestBody'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domainId}/{msId}:
+    get:
+      operationId: getMigrationSet_2
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+    patch:
+      operationId: applyPatchForMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetPatchRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+    put:
+      operationId: updateMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/internal/jobs/{tenant}/{domain}/{msId}/{implicit}:
+    put:
+      operationId: unlockMigrationset
+      parameters:
+      - explode: false
+        in: path
+        name: tenant
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - offline-job-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: offline-job-controller
+  /api/v1/tenants/{tenantId}:
+    get:
+      operationId: getTenant
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+    post:
+      operationId: createTenantSchema
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          maxLength: 40
+          minLength: 1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/tenants/addTenant:
+    post:
+      operationId: createTenantWithExistingSchema
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantBody'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/secrets/migrateVault:
+    post:
+      operationId: migrateVault
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: boolean
+          description: OK
+      summary: Migrate secrets to vault.
+      tags:
+      - secrets-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: secrets-controller
+  /api/v1/rationalization/{domainId}/{msId}:
+    delete:
+      operationId: cancelOfflineJob
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+    get:
+      operationId: getMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SseEmitter'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+    post:
+      operationId: generateReportOffline
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/{msId}/{implicit}:
+    delete:
+      operationId: cancelOfflineJob_1
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+    get:
+      operationId: getMigrationSet_1
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/SseEmitter'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+    post:
+      operationId: generateReportOffline_1
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/preview/{msId}:
+    post:
+      operationId: createCustomFragment
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomFragmentRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/migrationset/{domain}:
+    get:
+      operationId: getMigrationSets
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 2147483647
+          format: int32
+          minimum: 10
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderby
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortInfo'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/RationalisationFilter'
+        style: form
+      - explode: true
+        in: query
+        name: hidden
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: latestversion
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: checkIfApproved
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+    post:
+      operationId: createMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/tmpfile:
+    post:
+      operationId: createRationalizationActivity
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: migrationType
+        required: false
+        schema:
+          default: CONTENT
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateRationalizationActivity_request'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/links:
+    post:
+      operationId: createLinkBtwRatAndDasMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetLinkRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-content-type: application/json
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/import/{domain}:
+    post:
+      operationId: importMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: commit
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MigrationSetImportRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetImportRequest'
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-import-controller
+      x-content-type: multipart/form-data
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-import-controller
+  /api/v1/export/{domain}/{id}:
+    get:
+      operationId: exportMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          default: LATEST_APPROVED
+          enum:
+          - LATEST_APPROVED
+          - LATEST
+          type: string
+        style: form
+      responses:
+        "200":
+          description: OK
+      tags:
+      - export-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: export-controller
+    post:
+      operationId: exportResourcesFromRootInDomain
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrationSetExportRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+      tags:
+      - export-controller
+      x-content-type: application/json
+      x-accepts: application/json
+      x-tags:
+      - tag: export-controller
+  /api/v1/version/api:
+    get:
+      operationId: getApiVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/version:
+    get:
+      operationId: getVersion
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionConfig'
+          description: OK
+      tags:
+      - version-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: version-controller
+  /api/v1/tenants:
+    get:
+      operationId: getTenants
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResponseTenant'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/tenants/configuration:
+    get:
+      operationId: getTenantConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenantsConfiguration'
+          description: OK
+      tags:
+      - Tenant Admin Controller
+      x-accepts: application/json
+      x-tags:
+      - tag: Tenant Admin Controller
+  /api/v1/tenant/internal/{tenantId}:
+    get:
+      operationId: getTenant_1
+      parameters:
+      - explode: false
+        in: path
+        name: tenantId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResponseTenant'
+          description: OK
+      tags:
+      - /api/v1/tenant/internal
+      x-accepts: application/json
+      x-tags:
+      - tag: /api/v1/tenant/internal
+  /api/v1/report/{domain}/{id}:
+    get:
+      operationId: getMigrationReportDetails
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-report-controller
+      x-accepts: application/json
+      x-tags:
+      - tag: migration-set-report-controller
+  /api/v1/rationalization/{domainId}/template/fragments/{msId}:
+    get:
+      operationId: getTemplateFragments
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: commType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: resourcePackId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: dasObjectType
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderby
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortInfo'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/RationalisationFilter'
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/report/{msId}:
+    get:
+      operationId: getRationalisationRunResults
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/migrationset/{dasId}:
+    get:
+      operationId: getRatMigrationSetDetails
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: dasId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: latestApproved
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/fragments/{msId}:
+    get:
+      operationId: getRationalizationFragments
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: commType
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: resourcePackId
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: dasObjectType
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderby
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortInfo'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/RationalisationFilter'
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/fragments/superset/{fragmentId}:
+    get:
+      operationId: getCustomSuperSet
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: request
+        required: true
+        schema:
+          $ref: '#/components/schemas/CustomSuperSetRequest'
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/fragments/order/{fragmentId}:
+    get:
+      operationId: getFragmentOrder
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/fragments/groups/{fragmentId}:
+    get:
+      operationId: getGroupFragment
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/fragments/details/{fragmentId}:
+    get:
+      operationId: getFragmentDetails
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/custom/fragments/{customFragmentId}:
+    get:
+      operationId: getOrginatedFragments
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: customFragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/rationalization/{domainId}/custom/fragments/parent/{fragmentId}:
+    get:
+      operationId: getRootCustomFragmentId
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - rationalization-report-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: rationalization-report-controller
+  /api/v1/permissions/licenses:
+    get:
+      operationId: getLicensePermissions
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - permissions-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: permissions-controller
+  /api/v1/permissions/licenses/{production}:
+    get:
+      operationId: getLicensePermissions_1
+      parameters:
+      - explode: false
+        in: path
+        name: production
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - permissions-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: permissions-controller
+  /api/v1/permissions/configurations:
+    get:
+      operationId: getConfiguration
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - permissions-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: permissions-controller
+  /api/v1/migrationset/{domain}/{msid}/history:
+    get:
+      operationId: getResourceHistory
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msid
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/{id}/deletion-eligibility:
+    get:
+      operationId: getCanDeleteMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/template/variable/references/{variableId}/{templateId}:
+    get:
+      operationId: getTemplateVariableFragmentsReferences
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: variableId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: communications
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/template/rule/references/{ruleId}/{templateId}:
+    get:
+      operationId: getTemplateRuleFragmentsReferences
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ruleId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: communications
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/template/fragment/references/{fragmentId}/{templateId}:
+    get:
+      operationId: getTemplateFragmentsReferences
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: templateId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: communications
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/links/{msId}:
+    get:
+      operationId: getMigrationSetLinks
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/fragments/refernce/{msId}/{varId}:
+    get:
+      operationId: getFragmentReference
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: varId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/fragments/pdf/{msId}:
+    get:
+      operationId: getPdfFragments
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: pdfid
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: pageno
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pagecount
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domain}/fragment/references/{fragmentId}:
+    get:
+      operationId: getFragmentsReferences
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: fragmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/{domainId}/{id}/domains:
+    get:
+      operationId: getMigrationSet_3
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-domains-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-domains-controller
+  /api/v1/migrationset/template/{domain}/{msId}:
+    get:
+      operationId: getTemplateDetailsOfMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/template/fragments/{domain}/{msId}:
+    get:
+      operationId: getFragmentsOfTemplateMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderby
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortInfo'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/RationalisationFilter'
+        style: form
+      - explode: true
+        in: query
+        name: hidden
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: references
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/migrationset/fragments/{domain}/{msId}:
+    get:
+      operationId: getFragmentsOfMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          default: 0
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 10
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: orderby
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortInfo'
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          $ref: '#/components/schemas/RationalisationFilter'
+        style: form
+      - explode: true
+        in: query
+        name: hidden
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: references
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+  /api/v1/internal/jobs/{tenant}/{domain}/{msId}/{userName}/{implicit}:
+    get:
+      operationId: runJob
+      parameters:
+      - explode: false
+        in: path
+        name: tenant
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: domain
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: implicit
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      - explode: false
+        in: path
+        name: userName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: OK
+      tags:
+      - offline-job-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: offline-job-controller
+  /api/v1/migrationset/{domainId}/{msId}/{updateOnly}:
+    delete:
+      operationId: deleteMigrationSet
+      parameters:
+      - explode: false
+        in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: msId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: updateOnly
+        required: true
+        schema:
+          type: boolean
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/RationalizationResponseObject'
+          description: OK
+      tags:
+      - migration-set-controller
+      x-accepts: '*/*'
+      x-tags:
+      - tag: migration-set-controller
+components:
+  schemas:
+    DataResponseTenant:
+      example:
+        data:
+          schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/Tenant'
+      type: object
+    Schema:
+      example:
+        schemaMissingFromDatabase: true
+        schemaId: schemaId
+        latestSchemaChangeLogEntry:
+          liquiBaseVersion: liquiBaseVersion
+          orderExecuted: 0
+          id: id
+          dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        schemaId:
+          type: string
+        latestSchemaChangeLogEntry:
+          $ref: '#/components/schemas/SchemaChangeLogEntry'
+        schemaMissingFromDatabase:
+          type: boolean
+      type: object
+    SchemaChangeLogEntry:
+      example:
+        liquiBaseVersion: liquiBaseVersion
+        orderExecuted: 0
+        id: id
+        dateExecuted: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        dateExecuted:
+          format: date-time
+          type: string
+        orderExecuted:
+          format: int32
+          type: integer
+        liquiBaseVersion:
+          type: string
+      type: object
+    Tenant:
+      example:
+        schema:
+          schemaMissingFromDatabase: true
+          schemaId: schemaId
+          latestSchemaChangeLogEntry:
+            liquiBaseVersion: liquiBaseVersion
+            orderExecuted: 0
+            id: id
+            dateExecuted: 2000-01-23T04:56:07.000+00:00
+        tenantId: tenantId
+      properties:
+        tenantId:
+          type: string
+        schema:
+          $ref: '#/components/schemas/Schema'
+      type: object
+    CreateTenantBody:
+      example:
+        tenantId: tenantId
+        schemaName: schemaName
+        dbUserId: dbUserId
+        dbPassword: dbPassword
+      properties:
+        tenantId:
+          maxLength: 40
+          minLength: 1
+          type: string
+        schemaName:
+          type: string
+        dbUserId:
+          type: string
+        dbPassword:
+          type: string
+      required:
+      - dbPassword
+      type: object
+    ListResponseTenant:
+      example:
+        data:
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        - schema:
+            schemaMissingFromDatabase: true
+            schemaId: schemaId
+            latestSchemaChangeLogEntry:
+              liquiBaseVersion: liquiBaseVersion
+              orderExecuted: 0
+              id: id
+              dateExecuted: 2000-01-23T04:56:07.000+00:00
+          tenantId: tenantId
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          items:
+            $ref: '#/components/schemas/Tenant'
+          type: array
+      type: object
+    CustomFragmentRequest:
+      example:
+        fragTolerance: 0
+        isDynamic: true
+        name: name
+        description: description
+        fragments:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fragOccurrences:
+        - isPinned: true
+          isSelected: true
+          name: name
+          refId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - isPinned: true
+          isSelected: true
+          name: name
+          refId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        isIncluded: true
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        fragments:
+          items:
+            format: uuid
+            type: string
+          maxItems: 2147483647
+          minItems: 2
+          type: array
+        isDynamic:
+          type: boolean
+        isIncluded:
+          type: boolean
+        fragTolerance:
+          format: int32
+          type: integer
+        fragOccurrences:
+          items:
+            $ref: '#/components/schemas/FragmentRefRequest'
+          type: array
+      required:
+      - name
+      type: object
+    FragmentRefRequest:
+      example:
+        isPinned: true
+        isSelected: true
+        name: name
+        refId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        refId:
+          format: uuid
+          type: string
+        isSelected:
+          type: boolean
+        name:
+          type: string
+        isPinned:
+          type: boolean
+      type: object
+    RationalizationResponseObject:
+      example:
+        data: "{}"
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          type: object
+      type: object
+    FragmentRequest:
+      example:
+        fragTolerance: 0
+        isLibraryRule: true
+        name: name
+        description: description
+        fragOccurrences:
+        - isPinned: true
+          isSelected: true
+          name: name
+          refId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - isPinned: true
+          isSelected: true
+          name: name
+          refId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: type
+        isIncluded: true
+        dasId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        isIncluded:
+          type: boolean
+        dasId:
+          format: uuid
+          type: string
+        fragTolerance:
+          format: int32
+          type: integer
+        fragOccurrences:
+          items:
+            $ref: '#/components/schemas/FragmentRefRequest'
+          type: array
+        type:
+          type: string
+        isLibraryRule:
+          type: boolean
+      required:
+      - name
+      type: object
+    MigrationSetDomainRequest:
+      example:
+        rat: true
+        editable: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        toDomain: toDomain
+      properties:
+        id:
+          format: uuid
+          type: string
+        editable:
+          type: boolean
+        toDomain:
+          type: string
+        rat:
+          type: boolean
+      type: object
+    WorkflowRequestBody:
+      example:
+        state: DRAFT
+        locked: true
+        auditedComment: auditedComment
+      properties:
+        state:
+          enum:
+          - DRAFT
+          - REVIEW
+          - APPROVED
+          - REJECTED
+          type: string
+        auditedComment:
+          type: string
+        locked:
+          type: boolean
+      type: object
+    MigrationSetFilter:
+      example:
+        baseFilter: baseFilter
+        designPackId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        baseFilter:
+          type: string
+        designPackId:
+          format: uuid
+          type: string
+      type: object
+    MigrationSetRequest:
+      example:
+        filter:
+          baseFilter: baseFilter
+          designPackId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fragTolerance: 80
+        tmpId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        templates:
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+        name: name
+        ratTolerance: 54
+        description: description
+        outputSamples:
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        migrationType: CONTENT
+        dataSources:
+        - name: name
+          type: XML
+          isIncluded: true
+        - name: name
+          type: XML
+          isIncluded: true
+      properties:
+        id:
+          format: uuid
+          type: string
+        tmpId:
+          format: uuid
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        ratTolerance:
+          format: int32
+          maximum: 100
+          minimum: 50
+          type: integer
+        fragTolerance:
+          format: int32
+          maximum: 100
+          minimum: 50
+          type: integer
+        dataSources:
+          items:
+            $ref: '#/components/schemas/MigrationSetResource'
+          type: array
+        outputSamples:
+          items:
+            $ref: '#/components/schemas/MigrationSetResource'
+          maxItems: 2147483647
+          minItems: 1
+          type: array
+        templates:
+          items:
+            $ref: '#/components/schemas/MigrationSetResource'
+          type: array
+        migrationType:
+          enum:
+          - CONTENT
+          - TEMPLATE
+          - UNKNOWN
+          type: string
+        filter:
+          $ref: '#/components/schemas/MigrationSetFilter'
+      required:
+      - migrationType
+      - name
+      type: object
+    MigrationSetResource:
+      example:
+        name: name
+        type: XML
+        isIncluded: true
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - XML
+          - JSON
+          - PDF
+          - DOC
+          - DOCX
+          - HTM
+          - HTML
+          - TXT
+          - PNG
+          - JPG
+          - TEMPLATE
+          - THEME
+          - UNKNOWN
+          - BIN
+          type: string
+        isIncluded:
+          type: boolean
+      type: object
+    MigrationSetLinkRequest:
+      example:
+        ratMigrationSetId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        variables:
+        - ratVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dasVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - ratVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          dasVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dasMigrationSetId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        ratMigrationSetId:
+          format: uuid
+          type: string
+        dasMigrationSetId:
+          format: uuid
+          type: string
+        variables:
+          items:
+            $ref: '#/components/schemas/VariableLink'
+          type: array
+      required:
+      - dasMigrationSetId
+      - ratMigrationSetId
+      type: object
+    VariableLink:
+      example:
+        ratVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        dasVariableId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        ratVariableId:
+          format: uuid
+          type: string
+        dasVariableId:
+          format: uuid
+          type: string
+      required:
+      - dasVariableId
+      - ratVariableId
+      type: object
+    MigrationSetImportRequest:
+      properties:
+        encrypt:
+          type: string
+        document:
+          format: binary
+          type: string
+      type: object
+    MigrationSetExportRequest:
+      example:
+        versions: LATEST_APPROVED
+        encrypt: encrypt
+        id: id
+      properties:
+        versions:
+          enum:
+          - LATEST_APPROVED
+          - LATEST
+          type: string
+        id:
+          type: string
+        encrypt:
+          type: string
+      type: object
+    MigrationSetPatchRequest:
+      example:
+        locked: true
+        status: GRAY
+        isHidden: true
+      properties:
+        status:
+          enum:
+          - GRAY
+          - GRAYP
+          - GRAYF
+          - YELLOW
+          - YELLOWP
+          - YELLOWU
+          - YELLOWF
+          - GREEN
+          - GREENP
+          - GREENU
+          - GREENF
+          type: string
+        isHidden:
+          type: boolean
+        locked:
+          type: boolean
+      type: object
+    Details:
+      example:
+        git:
+          commits: commits
+          tag: tag
+          branch: branch
+          hash: hash
+        appName: appName
+        buildNumber: buildNumber
+        timestamp: timestamp
+      properties:
+        git:
+          $ref: '#/components/schemas/GitConfig'
+        appName:
+          type: string
+        buildNumber:
+          type: string
+        timestamp:
+          type: string
+      type: object
+    GitConfig:
+      example:
+        commits: commits
+        tag: tag
+        branch: branch
+        hash: hash
+      properties:
+        tag:
+          type: string
+        hash:
+          type: string
+        branch:
+          type: string
+        commits:
+          type: string
+      type: object
+    VersionConfig:
+      example:
+        patch: patch
+        major: major
+        minor: minor
+        versionString: versionString
+        apiIdentifier: apiIdentifier
+        details:
+          git:
+            commits: commits
+            tag: tag
+            branch: branch
+            hash: hash
+          appName: appName
+          buildNumber: buildNumber
+          timestamp: timestamp
+        clientVersion: clientVersion
+      properties:
+        apiIdentifier:
+          type: string
+        clientVersion:
+          type: string
+        details:
+          $ref: '#/components/schemas/Details'
+        major:
+          type: string
+        minor:
+          type: string
+        patch:
+          type: string
+        versionString:
+          type: string
+      type: object
+    DataResponseTenantsConfiguration:
+      example:
+        data:
+          autoSchemaManagement: true
+        status: status
+      properties:
+        status:
+          type: string
+        data:
+          $ref: '#/components/schemas/TenantsConfiguration'
+      type: object
+    TenantsConfiguration:
+      example:
+        autoSchemaManagement: true
+      properties:
+        autoSchemaManagement:
+          type: boolean
+      type: object
+    SseEmitter:
+      example:
+        timeout: 0
+      properties:
+        timeout:
+          format: int64
+          type: integer
+      type: object
+    SortInfo:
+      type: object
+    RationalisationFilter:
+      properties:
+        type:
+          items:
+            enum:
+            - MIGRATIONSET
+            - FRAGMENTS
+            type: string
+          type: array
+        searchString:
+          type: string
+        caseSensitive:
+          type: boolean
+        createdBy:
+          type: string
+        lockedBy:
+          type: string
+        updatedBy:
+          type: string
+        statesList:
+          items:
+            enum:
+            - DRAFT
+            - REVIEW
+            - APPROVED
+            - REJECTED
+            type: string
+          type: array
+        communicationIdList:
+          items:
+            type: string
+          type: array
+        migrationSetIdList:
+          items:
+            type: string
+          type: array
+      type: object
+    CustomSuperSetRequest:
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        fragmentRef:
+          items:
+            format: uuid
+            type: string
+          maxItems: 2147483647
+          minItems: 2
+          type: array
+      type: object
+    updateRationalizationActivity_request:
+      properties:
+        bundle:
+          format: binary
+          type: string
+      required:
+      - bundle
+      type: object
