@@ -1,15 +1,24 @@
 package org.openapitools.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import feign.Util;
 
 
 public class ApiKeyRequestInterceptor implements RequestInterceptor {
-  private final String location;
-  private final String name;
-  private String value;
 
+  @Value("${api.token.location}")
+  private final String location;
+
+  @Value("${api.token.name:Authorization}")
+  private final String name;
+
+  @Value("${api.token.value:Bearer <your-api-token>}")
+  private String value; 
+
+  
   public ApiKeyRequestInterceptor(String location, String name, String value) {
     Util.checkNotNull(location, "location", new Object[0]);
     Util.checkNotNull(name, "name", new Object[0]);
