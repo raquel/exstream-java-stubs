@@ -12,7 +12,7 @@ import feign.codec.ErrorDecoder;
 @Configuration
 public class ClientConfiguration {
 
-        @Bean
+    @Bean
     public Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL; // Logs request and response details
     }
@@ -32,5 +32,10 @@ public class ClientConfiguration {
     public ErrorDecoder errorDecoder() {
         return new CustomErrorDecoder(); // Handle API errors
     }
+
+    // @Bean
+    // public RequestInterceptor apiKeyRequestInterceptor() {
+    //     return new ApiKeyRequestInterceptor();
+    // }
 
 }

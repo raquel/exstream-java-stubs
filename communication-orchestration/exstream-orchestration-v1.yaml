@@ -1,0 +1,155 @@
+openapi: 3.0.1
+info:
+  title: Exstream Orchestration
+  version: v1
+servers: 
+  - url: 'https://communication.us.api.opentext.com'
+    description: 'United States'
+  - url: 'https://communication.au.api.opentext.com'
+    description: 'Australia'
+  - url: 'https://communication.ca.api.opentext.com'
+    description: 'Canada'
+security:
+  - tenant: []
+paths:
+  /api/v1/inputs/ondemand/{domain}/generate:
+    post:
+      tags:
+        - Orchestration Ondemand Requests
+      summary: Generate document output
+      operationId: generateDocumentOutput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                claim:
+                  claimNumber: 000-00-000106
+                  description: Hit curb!
+                  lossDate: '2022-09-19'
+                  reportedDate: '2022-09-19'
+                contactDetails:
+                  emailAddress1: 0000@guidewire.com
+                  emailAddress2: 0000@hotmail.com
+                  firstName: Allen
+                  lastName: Robertson
+                evaluations:
+                  - claimantOutOfPocket: '1000.00'
+                    diagnostic: '250.00'
+                    futureMedical: '1000.00'
+                    hospitalER: '1000.00'
+                    other: '5000.00'
+                    physicalTherapy: '1500.00'
+                    treatingPhysician: '500.00'
+                policyDetails:
+                  addressDetails:
+                    addressLine1: 4263 Live Oak Blvd.
+                    city: San Gabriel
+                    postalCode: '91101'
+                    state: CA
+                  insuredFirstName: Allen
+                  insuredLastName: Robertson
+                  insuredName: Allen Robertson
+                  policyNumber: 54-253465
+                  policyPeriodEffectiveDate: '2022-03-30'
+                  policyPeriodExpirationDate: '2023-03-29'
+      parameters:
+        - name: communicationId
+          in: header
+          schema:
+            type: string
+          required: true
+          description: The id of the communication to generate.
+          example: 243611df-7f67-4816-b1c7-5f6617d5afa1
+        - name: driverDataSource
+          in: header
+          schema:
+            type: string
+          required: true
+          description: >-
+            The "prodDsn" value for this communication.
+          example: ClaimEstimateDriver
+        - name: empowerUser
+          in: header
+          schema:
+            type: string
+          description: >-
+            This should be a system account, not the account of the user making
+            the request.  Using a system account allows end users to have fewer
+            permissions.
+          example: 'tenantadminuser'
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: '*/*'
+        - name: domain
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/v1/inputs/fulfillment/ondemand/{domain}/fulfill:
+    post:
+      tags:
+        - Orchestration Ondemand Requests
+      summary: Fulfill Empower output
+      operationId: fulfillEmpowerOutput
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                documents:
+                  - '243611df-7f67-4816-b1c7-5f6617d5afa1'
+      parameters:
+        - name: communicationId
+          in: header
+          schema:
+            type: string
+          required: true
+          description: The id of the communication that is being fulfilled.
+          example: 21f9a9fe-b363-4f32-8303-6a8bf5f7009e
+        - name: driverDataSource
+          in: header
+          schema:
+            type: string
+          required: true
+          description: >-
+            The "prodDsn" value for this communication.
+          example: EmpowerFulfillmentDriver
+        - name: preserveDocuments
+          in: header
+          schema:
+            type: boolean
+          required: true
+          description: >-
+            preserveDocuments=false removes the documents from the Empower
+            database.  This prevents duplicate storage of documents.
+          example: 'false'
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/pdf
+        - name: domain
+          in: path
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/pdf: {}
+components:            
+  securitySchemes:
+    tenant:
+      type: 'openIdConnect'
+      openIdConnectUrl: 'https://communication.ca.api.opentext.com/tenants/$tenantId/.well-known/openid-configuration/'
