@@ -1,0 +1,9 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/org/openapitools/api/ApiApi.java
+src/main/java/org/openapitools/api/ApiApiClient.java
+src/main/java/org/openapitools/configuration/ApiKeyRequestInterceptor.java
+src/main/java/org/openapitools/configuration/ClientConfiguration.java
+src/main/java/org/openapitools/configuration/ClientPropertiesConfiguration.java
+src/main/resources/oauth2-client.properties
